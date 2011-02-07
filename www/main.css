@@ -24,6 +24,7 @@ h1 {
 
 /*** layout ***/
 #drm {
+  /*background-color:blue;*/
   width:500px;
   height:200px;
   margin-left:auto;
@@ -33,12 +34,13 @@ h1 {
 }
 
 #login {
-  background-color:green;
-
-  width:500px;
-  height:50px;
-  margin-left:auto;
-  margin-right:0px;  
+  /*background-color:green;*/
+  position:absolute;
+  top:0px;
+  right:0px;
+  
+  padding-top: 5px;
+  padding-right:5px;
 
 
 }
