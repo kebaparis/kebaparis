@@ -1,0 +1,46 @@
+/*
+ * added 07.02.2011
+ *
+ *
+ *
+ *
+ */
+
+@import "global_reset.css";
+
+
+/*** color ***/
+body {
+  font-family:Verdana, sans-serif;
+  background-color:#BD0000;
+  color:white;
+}
+
+h1 {
+  font-size:1.5em;
+  font-family:Verdana, sans-serif;
+}
+
+
+/*** layout ***/
+#drm {
+  width:500px;
+  height:200px;
+  margin-left:auto;
+  margin-right:auto;
+
+
+}
+
+#login {
+  background-color:green;
+
+  width:500px;
+  height:50px;
+  margin-left:auto;
+  margin-right:0px;  
+
+
+}
+
+
