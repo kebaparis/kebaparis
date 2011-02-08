@@ -4,7 +4,7 @@
   <head>
   
   
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     
     <style type="text/css">
     
@@ -16,36 +16,49 @@
   </head>
 
   <body>
+  
     <div id="login">
     
       <?php include 'login_form.php'; ?>
       
     </div> <!-- end div #login -->
-  
-  
+ 
   
     <div id="drm">
       <table>
         <tr>
-          <th>name:</th>
+          <th>Name:</th>
           <td>Kebap Basel</td>
         </tr>
         
         <tr>
-          <th>location:</th>
+          <th>Location:</th>
           <td>Basel</td>
         </tr>
         
         <tr>
-          <th>attribut:</th>
+          <th>Attribut:</th>
           <td>Basel</td>
         </tr>
         
       </table>
     
     </div>
+    
+    <div id="drminfo">
+  		<table>
+			<tr>
+				<td> More Informations about Kebeabstand </td>
+				<td> Hoore </td>		
+			</tr>  		
+  		</table>
+  	 </div>
 
-  
+
+	 <div id="footer">
+		<p> feedback@kebaparis.ch </p>  
+	 </div>
+	 
   </body>
 
 </html>
