@@ -8,7 +8,7 @@
     
     <style type="text/css">
     
-      /* ... Hier werden die Formate definiert ... */
+      /* ... #blahh {  } ... */
     
     </style>
   
@@ -25,20 +25,23 @@
   
   
     <div id="drm">
-<table>
-  <tr>
-    <th>Kebap Basel</th>
-  </tr>
-  
-  <tr>
-    <td>blahh</td>
-  </tr>
-  
-  <tr>
-    <td>blahh</td>
-  </tr>
-  
-</table>
+      <table>
+        <tr>
+          <th>name:</th>
+          <td>Kebap Basel</td>
+        </tr>
+        
+        <tr>
+          <th>location:</th>
+          <td>Basel</td>
+        </tr>
+        
+        <tr>
+          <th>attribut:</th>
+          <td>Basel</td>
+        </tr>
+        
+      </table>
     
     </div>
 
