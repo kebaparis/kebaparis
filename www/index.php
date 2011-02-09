@@ -24,35 +24,35 @@
     </div> <!-- end div #login -->
  
   
-    <div id="drm">
-      <table>
-        <tr>
-          <th>Name:</th>
-          <td>Kebap Basel</td>
-        </tr>
-        
-        <tr>
-          <th>Location:</th>
-          <td>Basel</td>
-        </tr>
-        
-        <tr>
-          <th>Attribut:</th>
-          <td>Basel</td>
-        </tr>
-        
-      </table>
+    <div id="stand">
+
+		<table>
+			<tr>
+				<th>Name:</th>
+				<td>Kebap Basel</td>
+			</tr>
+
+			<tr>
+				<th>Location:</th>
+				<td>Basel</td>
+			</tr>
+
+			<tr>
+				<th>Attribut:</th>
+				<td>Basel</td>
+			</tr>
+		</table>
     
-    </div>
-    
+    </div> <!-- end -->
+    <!--
     <div id="drminfo">
   		<table>
 			<tr>
 				<td> More Informations about Kebeabstand </td>
-				<td> Hoore </td>		
+				<td> Hoore </td>
 			</tr>  		
   		</table>
-  	 </div>
+  	 </div> -->
 
 
 	 <div id="footer">

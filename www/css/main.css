@@ -9,27 +9,27 @@
 @import "global_reset.css";
 
 
-/*** color ***/
+/*** color / font sizes ***/
 body {
-  font-family:Verdana, sans-serif;
-  background-color:#BD0000;
-  color:white;
+	font-family:Verdana, sans-serif;
+	background-color:#BD0000;
+	color:white;
 }
 
 h1 {
-  font-size:1.5em;
-  font-family:Verdana, sans-serif;
+	font-size:1.5em;
+	font-family:Verdana, sans-serif;
 }
 
 
 /*** layout ***/
-#drm {
-  position: relative;
-  background-color:blue;
-  width: 300px;
-  height: 200px;
-  margin-left: 250px;
-  margin-top: 75px;
+#stand {
+	position:relative;
+	background-color:blue;
+	width:200px;
+	height:200px;
+	left:62%; /* golden rule */
+	right:38%;
 }
 
 #drminfo {
@@ -42,24 +42,23 @@ h1 {
 }
 
 #login {
-  /*background-color:green;*/
-  position:absolute;
-  top:15px;
-  right:10px;
-  
-  padding-top: 5px;
-  padding-right:5px;
+	/*background-color:green;*/
+	position:absolute;
+	top:10px;
+	right:10px;
+	padding-top: 5px;
+	padding-right:5px;
 }
 
 /* style in footer */
 #footer
 {
-width: 85%;
-height: 35px;
-margin: 50px 100px auto auto;
-background-color: green;
+	width: 85%;
+	height: 35px;
+	margin: 50px 100px auto auto;
+	background-color: green;
 
-font-size: 14px;
-text-align: center;
+	font-size: 14px;
+	text-align: center;
 }
 

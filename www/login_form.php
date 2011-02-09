@@ -13,7 +13,7 @@
           </td>
           
           <td>
-            <input type="submit" />
+            <input type="submit" value="login" />
             </form>
           </td>
           
