@@ -27,23 +27,26 @@
     <div id="stand">
 
 		<table>
+
 			<tr>
-				<th>Name:</th>
-				<td>Kebap Basel</td>
+				<td rowspan="3"><div id="map">map</div></td>
+				<td colspan="3"><h1>Seeperle<h1></td>
 			</tr>
 
 			<tr>
-				<th>Location:</th>
-				<td>Basel</td>
+				<td colspan="3">Stäfa</td>
 			</tr>
 
-			<tr>
-				<th>Attribut:</th>
-				<td>Basel</td>
+			<tr id="buttons">
+				<td><a href"#">rate</a></td>
+				<td><a href"#">social</a></td>
+				<td><a href"#">new</a></td>
 			</tr>
+
 		</table>
     
-    </div> <!-- end -->
+	</div> <!-- end #stand -->
+
     <!--
     <div id="drminfo">
   		<table>
