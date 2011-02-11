@@ -26,18 +26,11 @@
                 });
  
                 google.maps.event.addListener(marker, "dragend", function() {
-                               //var newPosition = String(marker.getPosition());
-                               var newPosition = marker.getPosition();
-                               //updateMarkerStatus(newPosition);
-                               //updateMarkerStatus(getCity(newPosition));
-                               //alert(getCity("17.74033553, 83.25067267"));
-                               //getCity(newPosition);
-                               //var newStr = newPosition.substring(1,newPosition.length-1);
-                               //var newPosition = "shit"
-                               //var newStr = newPosition.substring(0, newPosition.length-1);
-                               var Location = getCity(newPosition);
-                               updateMarkerStatus(newPosition);
-                               //alert(typeof newPosition);
+
+					var newPosition = marker.getPosition();
+
+					var Location = getCity(newPosition);
+					updateMarkerStatus(newPosition);
                 });
                
  
@@ -47,18 +40,7 @@
                 }
                 
                 function getCity(oInput) {
-																	//alert(str);
-																	//var str = str.slice(1, -1);
-																	//alert(str);
-																	//var latlngStr = str.split(",",2);
-																	//alert("lat: " + latlngStr[0] + " lng: " + latlngStr[1]);
-																	//var lat = parseFloat(latlngStr[0]);
-																	//var lng = parseFloat(latlngStr[1]);
-																	//alert("lat: " + lat + " lng: " + lng);
-																	//var latlng = new google.maps.LatLng(lat, lng);
-							
 
-							  
 							  var address;
 							  latlng = oInput;
 
@@ -81,8 +63,7 @@
 							  function callback(input) {
 								document.getElementById('markerStatus').innerHTML = document.getElementById('markerStatus').innerHTML + address;
 								//alert("2 " + input);
-							  
-							  }
+							  } // end callback
 
                              
                 } // end getCity()
