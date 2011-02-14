@@ -5,11 +5,12 @@ class user {
 public $username;
 public $password;
 public $email;
-public $valide;
-public $EmailCount;
-public $session_id;
 
-private $CookieLifetimeTime;
+private $activated;
+private $emailCount;
+private $session_id;
+
+private $CookieLifeTime;
 
 //db
 private $db_handler;
@@ -19,14 +20,14 @@ private $db_password;
 private $db_name;
 
 	//runs every time a new reference is created
-	public function __construct($newUsername, $newPassword) {
+	public function __construct($newUsername, $newPassword, $newEmail) {
 
 		//create useless session
 		$this->createSession();
 		
 		include 'db_config.php';
 		
-		$this->CookieLifetimeTime = 60*60*24*50;
+		$this->CookieLifeTime = 60*60*24*50;
 
 		$this->db_handler = mysql_connect($this->db_server, $this->db_user, $this->db_password) or die ("connect to db failed!");
 		mysql_select_db($this->db_name, $this->db_handler) or die ("select of db failed!");
@@ -34,6 +35,7 @@ private $db_name;
 		
 		$this->username = $newUsername;
 		$this->password = $newPassword;
+		$this->email = $newEmail;
 		echo "class constructed: " . $this->username . "</br>";
 	}
 
@@ -53,16 +55,45 @@ private $db_name;
 		//write new user in DB
 		//sendValidationEmail();
 	  //else put out faillure
-   }
+	  
+	  //if ($this->registrationPossible() == true) {
+        if (true == true) {
+       	  
+       	  
+       	  mysql_query("
+           	  INSERT INTO tUser (usrName, usrPassword, usrEmail)
+           	  VALUES ('$this->username', MD5('$this->password'), '$this->email')
+           ");
+       	  
+	  
+     	  //$this->sendActivationEmail();
+     	  return true;
+	  }
+	  
+	}
 
 	//check validation in DB
-    public function checkValidationDB() {
+    public function checkActivationDB() {
       //lookup in DB if valide
       //return true of false
+      
+      $sqlResult = mysql_query("SELECT COUNT(*) FROM tUser WHERE tUser.usrName == '$this->username' AND tUser.usrActivated == TRUE");
+      $sqlResultCount = mysql_num_rows($sqlResult);
+      
+      if ($sqlResultCount == 1)
+      {
+        return true;
+      }
+      else {
+        return false;
+      }
+
+      
+      
     }   
 
 	//send validation Email
-    private function sendValidationEmail() {
+    private function sendActivationEmail() {
     //if checkRegistrationDB();
       //if not valide jet
         //if not sent to much Emails then
@@ -71,16 +102,19 @@ private $db_name;
           //or send again write in DB
           //return true if sent
       //else return false if not sent
+      
+      
+      
 
 }
 
 	//write validation
-    private function writeValidation() {
+    private function writeActivation() {
       //write Validation in DB
     }
 
 	//check validation link <> user
-    public function checkValidationLink() {
+    public function checkActivationLink() {
       //lookup in DB if right Link <> user
       //writeValidation()
       //createSession();
@@ -103,14 +137,14 @@ private $db_name;
 			session_name('usr_session');
 			
 			ini_set('session.use_cookies', true);
-			ini_set('session.gc_maxlifetime', time() + $this->CookieLifetimeTime + 60);
-			ini_set('session.cookie_lifetime', time() + $this->CookieLifetimeTime);
+			ini_set('session.gc_maxlifetime', time() + $this->CookieLifeTime + 60);
+			ini_set('session.cookie_lifetime', time() + $this->CookieLifeTime);
 			
-			session_set_cookie_params($this->CookieLifetimeTime);
+			session_set_cookie_params($this->CookieLifeTime);
 			session_start();
 			//standart values
 			$_SESSION['logedin'] = false;
-			$_SESSION['valide'] = false;
+			$_SESSION['activated'] = false;
 			$_SESSION['type'] = "user";
 		}
 	}
@@ -126,22 +160,13 @@ private $db_name;
           //return error
       //return true false
 	
-	
-	
-	
 
 	$_SESSION['username'] = $this->username;
-	$_SESSION['email'] = $this->username;
+	$_SESSION['email'] = $this->email;
 	$_SESSION['logedin'] = true;
 	$_SESSION['type'] = "user";
-	//$_SESSION['valide'] = checkValidationDB();
-
-	  
-	  
-	  
-	  
-	  
-	  
+	//$_SESSION['activated'] = checkValidationDB();
+  
 	  
     }
     
@@ -149,6 +174,13 @@ private $db_name;
     public function checkValidationSession() {
       //lookup in Session if valide
       //return true of false
+      if ($_SESSION['activated'] == true) {
+        return true;
+      }
+      else {
+        return false;
+      }
+      
     } 
 
 	//destroy session > logout

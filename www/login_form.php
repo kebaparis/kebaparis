@@ -1,3 +1,15 @@
+<?php
+
+	ini_set('display_errors', 1);
+	error_reporting(E_ALL);
+
+include 'classes.php';
+
+$myuser = new user("koma-5", "12345", "blahh@shit.com");
+$myuser->register();
+
+?>
+
       <table>
         <tr>
         
