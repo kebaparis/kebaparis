@@ -21,7 +21,7 @@ private $db_name;
 	//runs every time a new reference is created
 	public function __construct($newUsername, $newPassword) {
 
-		//create usless session
+		//create useless session
 		$this->createSession();
 		
 		include 'db_config.php';
@@ -35,7 +35,6 @@ private $db_name;
 		$this->username = $newUsername;
 		$this->password = $newPassword;
 		echo "class constructed: " . $this->username . "</br>";
-		echo time();
 	}
 
 	//check registration possible
