@@ -1,0 +1,21 @@
+#SET FOREIGN_KEY_CHECKS=0;
+
+USE fifthch_kebap;
+
+DROP TABLE IF EXISTS tUser;
+CREATE TABLE tUser
+(
+  `usrID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `usrName` VARCHAR(30) NOT NULL UNIQUE,
+  `usrPassword` VARCHAR(30) NOT NULL,
+  `usrEmail` VARCHAR(30) NOT NULL UNIQUE,
+  `usrActivationtionkey` VARCHAR(30),
+  `usrActivationksent` TINYINT NOT NULL,
+  `usrActivated` BOOLEAN NOT NULL DEFAULT FALSE,
+  `usrCreated` TIMESTAMP NOT NULL,
+  `usrType` VARCHAR(30) NOT NULL DEFAULT 'user',
+  PRIMARY KEY (`usrID`),
+  INDEX (`usrID`)
+) ENGINE=INNODB;
+
+#SET FOREIGN_KEY_CHECKS=1;
