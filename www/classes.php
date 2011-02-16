@@ -19,22 +19,28 @@ private $db_user;
 private $db_password;
 private $db_name;
 
+
+private $SALT_LENGTH;
+
 	//runs every time a new reference is created
 	public function __construct($newUsername, $newPassword, $newEmail) {
 
+		$SALT_LENGTH = 16;
+	
 		//create useless session
 		$this->createSession();
 		
 		include 'db_config.php';
 		
 		$this->CookieLifeTime = 60*60*24*50;
+		$this->SALT_LENGTH = 32;
 
 		$this->db_handler = mysql_connect($this->db_server, $this->db_user, $this->db_password) or die ("connect to db failed!");
 		mysql_select_db($this->db_name, $this->db_handler) or die ("select of db failed!");
 		echo "db conected: " . $this->db_server . "</br>";
 		
 		$this->username = $newUsername;
-		$this->password = $newPassword;
+		$this->password['plaintext'] = $newPassword;
 		$this->email = $newEmail;
 		echo "class constructed: " . $this->username . "</br>";
 	}
@@ -56,18 +62,23 @@ private $db_name;
 		//sendValidationEmail();
 	  //else put out faillure
 	  
+	  $saltAndHash = $this->generateHash($this->password['plaintext']);
+	  list($this->password['salt'], $this->password['hash']) = explode(";", $saltAndHash, 2);
+	  echo $this->password['salt'] . "  " . $this->password['hash'] . " ";
+	  
+	  
 	  //if ($this->registrationPossible() == true) {
         if (true == true) {
        	  
        	  
-       	  mysql_query("
-           	  INSERT INTO tUser (usrName, usrPassword, usrEmail)
-           	  VALUES ('$this->username', MD5('$this->password'), '$this->email')
-           ");
+		  mysql_query("
+			  INSERT INTO tUser (usrName, usrPassword, usrSalt, usrEmail)
+			  VALUES ('" . $this->username . "', '" . $this->password['hash'] . "', '" . $this->password['salt'] . "', '" . $this->email . "')
+		   ");
        	  
 	  
-     	  //$this->sendActivationEmail();
-     	  return true;
+			$this->sendActivationEmail();
+		return true;
 	  }
 	  
 	}
@@ -102,15 +113,47 @@ private $db_name;
           //or send again write in DB
           //return true if sent
       //else return false if not sent
+	  
+	  $activationkey = md5(uniqid(rand() * rand(), true) . $this->username);
+	  
+	  $bool = mysql_query("UPDATE tUser SET tUser.usrActivationtionkey = '$activationkey', usrActivationtionkeysent = usrActivationtionkeysent+1 WHERE tUser.usrName = '$this->username'");
       
-      
+		$body = <<<EOF
+Hello Hello $this->username,
+
+your activation key 
+http://kebaparis.ch/login.php?akey=$activationkey
+http://127.0.0.1/login.php?akey=$activationkey
+
+
+EOF;
+	  
+		sendEmail($this->username . " <" . $this->email . ">", "kebaparis.ch registration", $body);
       
 
-}
+	}
+	
+	//generates the password hash and the salt
+	public function generateHash($plainText, $salt = null) {
+
+		if ($salt === null)
+		{
+			$salt = substr(md5(uniqid(rand(), true)), 0, $this->SALT_LENGTH);
+		}
+		else
+		{
+			$salt = substr($salt, 0, $this->$SALT_LENGTH);
+		}
+
+		return $salt . ";" . md5($salt . $plainText);
+
+	}
+
 
 	//write validation
     private function writeActivation() {
       //write Validation in DB
+	  //rewrite Session
     }
 
 	//check validation link <> user
@@ -149,7 +192,7 @@ private $db_name;
 		}
 	}
 	
-	//create session > login
+	//makeSessionUsable > login
     public function makeSessionUsable() {
       //checkSession() if allready loged in
         // or modify session (rewrite session variable valide checkValidation())
@@ -216,4 +259,56 @@ private $db_name;
 
 
 } //end class user
+
+
+
+
+
+function sendEmail($recipient, $subject, $body) {
+  
+	if (!is_numeric($recipient)) {
+		$to = $recipient;
+	}
+	else {
+		//database query for email
+	}
+	
+	require_once "Mail.php";
+
+	include 'mail_config.php';
+
+
+	$headers = array (
+		'From' => $from,
+		'To' => $to,
+		'Subject' => $subject
+	);
+ 
+	$smtp = Mail::factory(
+	'smtp',
+	array (
+		'host' => $host,
+		'port' => $port,
+		'auth' => TRUE,
+		'username' => $username,
+		'password' => $password,
+		'debug' => false
+		)
+	);
+
+	$mail = $smtp->send($to, $headers, $body);
+	
+	/*
+	if (PEAR::isError($mail)) {
+		echo("<p>" . $mail->getMessage() . "</p>");
+	}
+	else {
+		echo("<p>Message successfully sent!</p>");
+	} */
+}
+
+
+
+
+
 ?>

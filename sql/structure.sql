@@ -7,15 +7,19 @@ CREATE TABLE tUser
 (
   `usrID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `usrName` VARCHAR(30) NOT NULL UNIQUE,
-  `usrPassword` VARCHAR(30) NOT NULL,
+  `usrPassword` VARCHAR(32) NOT NULL,
+  `usrSalt` VARCHAR(32) NOT NULL,
   `usrEmail` VARCHAR(30) NOT NULL UNIQUE,
-  `usrActivationtionkey` VARCHAR(30),
-  `usrActivationksent` TINYINT NOT NULL,
+  `usrType` VARCHAR(10) NOT NULL DEFAULT 'user',
+  `usrActivationtionkey` VARCHAR(32) UNIQUE,
+  `usrActivationtionkeysent` TINYINT NOT NULL,
   `usrActivated` BOOLEAN NOT NULL DEFAULT FALSE,
-  `usrCreated` TIMESTAMP NOT NULL,
-  `usrType` VARCHAR(30) NOT NULL DEFAULT 'user',
+  `usrCreated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`usrID`),
   INDEX (`usrID`)
 ) ENGINE=INNODB;
+
+DROP TABLE IF EXISTS tMailque;
+
 
 #SET FOREIGN_KEY_CHECKS=1;

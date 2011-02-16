@@ -5,7 +5,7 @@
 
 include 'classes.php';
 
-$myuser = new user("koma-5", "12345", "blahh@shit.com");
+$myuser = new user("koma6", "12345", "info@kebaparis.ch");
 $myuser->register();
 
 ?>
