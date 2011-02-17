@@ -14,7 +14,9 @@ CREATE TABLE tUser
   `usrActivationtionkey` VARCHAR(32) UNIQUE,
   `usrActivationtionkeysent` TINYINT NOT NULL,
   `usrActivated` BOOLEAN NOT NULL DEFAULT FALSE,
+  `usrIP` VARCHAR(39),
   `usrCreated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usrLastLogin` TIMESTAMP,
   PRIMARY KEY (`usrID`),
   INDEX (`usrID`)
 ) ENGINE=INNODB;

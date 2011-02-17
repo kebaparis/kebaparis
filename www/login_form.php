@@ -5,8 +5,9 @@
 
 include 'classes.php';
 
-$myuser = new user("koma6", "12345", "info@kebaparis.ch");
-$myuser->register();
+$myuser = new user("koma5", "12345", "mkoch@hsr.ch");
+$myuser->sendActivationEmail();
+echo $myuser->registrationPossible();
 
 ?>
 

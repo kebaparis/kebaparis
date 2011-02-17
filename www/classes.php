@@ -46,11 +46,23 @@ private $SALT_LENGTH;
 	}
 
 	//check registration possible
-   private function registrationPossible() {
-      //check time between last registration from IP (too many sign ups from your ip)
-      //username allredy used
-      //email allredy used
-      
+   public function registrationPossible() {
+		//check time between last registration from IP (too many sign ups from your ip)
+		//username allredy used
+		//email allredy used
+
+		$result = mysql_query("
+			  SELECT COUNT(*) FROM tUser WHERE tUser.usrName = '" . $this->username . "' OR tUser.usrEmail = '" . $this->email . "'
+		");
+		$count = mysql_result($result, 0);
+		
+		
+		
+		
+	  
+	  return $count;
+	  
+	  
       //return exact faillure
    
    }
@@ -64,7 +76,7 @@ private $SALT_LENGTH;
 	  
 	  $saltAndHash = $this->generateHash($this->password['plaintext']);
 	  list($this->password['salt'], $this->password['hash']) = explode(";", $saltAndHash, 2);
-	  echo $this->password['salt'] . "  " . $this->password['hash'] . " ";
+	  //echo $this->password['salt'] . "  " . $this->password['hash'] . " ";
 	  
 	  
 	  //if ($this->registrationPossible() == true) {
@@ -104,8 +116,8 @@ private $SALT_LENGTH;
     }   
 
 	//send validation Email
-    private function sendActivationEmail() {
-    //if checkRegistrationDB();
+    public function sendActivationEmail() {
+    //if checkUserDB();
       //if not valide jet
         //if not sent to much Emails then
           // increment Email Sent count
@@ -113,7 +125,9 @@ private $SALT_LENGTH;
           //or send again write in DB
           //return true if sent
       //else return false if not sent
-	  
+	
+	
+	
 	  $activationkey = md5(uniqid(rand() * rand(), true) . $this->username);
 	  
 	  $bool = mysql_query("UPDATE tUser SET tUser.usrActivationtionkey = '$activationkey', usrActivationtionkeysent = usrActivationtionkeysent+1 WHERE tUser.usrName = '$this->username'");
@@ -150,25 +164,35 @@ EOF;
 	}
 
 
-	//write validation
-    private function writeActivation() {
-      //write Validation in DB
-	  //rewrite Session
-    }
-
 	//check validation link <> user
-    public function checkActivationLink() {
-      //lookup in DB if right Link <> user
-      //writeValidation()
-      //createSession();
-      //return true;
-      //else return false;
-    }
+    public function checkActivationLink($linkSent) {
+
+		$sqlResult = mysql_query("UPDATE tUser SET tUser.usrActivated = TRUE WHERE tUser.usrActivationtionkey = '$linkSent'");
+
+		if  ($sqlResult) {
+			$this->makeSessionUsable();
+			return true;
+		}
+		else {
+			return false;
+		}
+
+	}
 
 	//check if registred
-    public function checkRegistrationDB() {
+    public function checkUserDB() {
       //lookup in DB if user exists
-      //return true or false
+	  
+	  $sqlResult = mysql_query("SELECT COUNT(*) FROM tUser WHERE tUser = '$this->username'");
+	  $count = mysql_result($sqlResult, 0);
+	  
+	  if ($count == 1) {
+		return true;
+	  }
+	  else {
+		return false;
+	  }
+
     }
 
 	//creates a usless standart session
@@ -204,12 +228,12 @@ EOF;
       //return true false
 	
 
-	$_SESSION['username'] = $this->username;
-	$_SESSION['email'] = $this->email;
-	$_SESSION['logedin'] = true;
-	$_SESSION['type'] = "user";
-	//$_SESSION['activated'] = checkValidationDB();
-  
+		$_SESSION['username'] = $this->username;
+		$_SESSION['email'] = $this->email;
+		$_SESSION['logedin'] = true;
+		$_SESSION['type'] = "user";
+		$_SESSION['activated'] = $this->checkActivationDB();
+	  
 	  
     }
     
@@ -239,7 +263,13 @@ EOF;
 	//check Session > check login
     public function checkSession() {
         //check session variable loggded in
-        //return true false
+      if ($_SESSION['logedin'] == true) {
+        return true;
+      }
+      else {
+        return false;
+      }
+		
     }
 
 	//remove user
