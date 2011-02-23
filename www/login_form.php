@@ -7,11 +7,12 @@ include 'classes.php';
 $myDB = new Database();
 $myDB->connect();
 
-$myuser = new user("koma9", "12345", "balhhhhh@5th.ch");
-//$myuser->register();
-echo $myuser->registrationPossible() . "<br />";
-//$myuser->sendActivationEmail();
-//echo $myuser->registrationPossible();
+$myuser = new user("koma6", "12345", "mkoch@hsr.ch");
+$myuser->register();
+//echo $myuser->registrationPossible() . "<br />";
+//$myuser->checkActivationLink("fecf5c6ea46c7b57c73016b2773aa2d1"); //working
+//$myuser->sendActivationEmail(); //working
+
 
 
 $myDB->quit();

@@ -19,8 +19,6 @@ private $SALT_LENGTH;
 
 	//runs every time a new reference is created
 	public function __construct($newUsername, $newPassword, $newEmail) {
-
-		$SALT_LENGTH = 16;
 	
 		//create useless session
 		$this->createSession();
@@ -43,7 +41,6 @@ private $SALT_LENGTH;
 		//username allredy used
 		//email allredy used
 		$errorCode = 0;
-		$error = NULL;
 		
 
 		$result = mysql_query("
@@ -53,7 +50,7 @@ private $SALT_LENGTH;
 		$usrCreated = mysql_result($result, 0);
 		
 		if ( time() - $usrCreated < $this->minRegDelay ) {
-			$errorCode = 10;
+			$errorCode = 10; // to much registrations
 		}
 		
 		
@@ -61,36 +58,19 @@ private $SALT_LENGTH;
 			SELECT COUNT(*) FROM tUser WHERE tUser.usrName = '" . $this->username . "'
 		");
 		if (mysql_result($result, 0) > 0) {
-			$errorCode = 11;
+			$errorCode = 11; //username allready used
 		}
 
 		$result = mysql_query("
 			SELECT COUNT(*) FROM tUser WHERE tUser.usrEmail = '" . $this->email . "'
 		");
 		if (mysql_result($result, 0) > 0) {
-			$errorCode = 12;
+			
+			if ($errorCode == 11) { $errorCode = 13;} //username and emailaddress are allready used
+			else { $errorCode = 12;} // only the email adress is used
 		}
 		
-
-		
-		
-		
-		switch ($errorCode) {
-			case 0:
-				$error = true;
-				break;
-			case 10:
-				$error = "to much registrattions from your IP";
-				break;
-			case 11:
-				$error = "username allready used";
-				break;
-			case 12:
-				$error = "email allready used";
-				break;
-		}
-		
-		return $error;
+		return $errorCode;
 	  
 	  
       //return exact faillure
@@ -103,14 +83,16 @@ private $SALT_LENGTH;
 		//write new user in DB
 		//sendValidationEmail();
 	  //else put out faillure
+	 
+	  $errorCode = $this->registrationPossible();
 	  
-	  $saltAndHash = $this->generateHash($this->password['plaintext']);
-	  list($this->password['salt'], $this->password['hash']) = explode(";", $saltAndHash, 2);
-	  //echo $this->password['salt'] . "  " . $this->password['hash'] . " ";
-	  
-	  
-	  //if ($this->registrationPossible() == true) {
-        if (true == true) {
+	  if ($errorCode == 0) {
+       //if (true == true) {
+       	  
+          $saltAndHash = $this->generateHash($this->password['plaintext']);
+          list($this->password['salt'], $this->password['hash']) = explode(";", $saltAndHash, 2);
+  
+       	  
        	  
 		  mysql_query("
 			  INSERT INTO tUser (usrName, usrPassword, usrSalt, usrEmail, usrIP)
@@ -120,8 +102,26 @@ private $SALT_LENGTH;
 		   
 	  
 			$this->sendActivationEmail();
-		return true;
+      		return true;
 	  }
+	  
+	 switch ($errorCode) {
+        case 0:
+          echo "registred sucessfully";
+          break;
+        case 10:
+          echo "to much registrattions from your IP";
+          break;
+        case 11:
+          echo "username allready used";
+          break;
+        case 12:
+          echo "email allready used";
+          break;
+        case 13:
+          echo "email and username allready used";
+          break;
+      }
 	  
 	}
 
@@ -130,8 +130,8 @@ private $SALT_LENGTH;
       //lookup in DB if valide
       //return true of false
       
-      $sqlResult = mysql_query("SELECT COUNT(*) FROM tUser WHERE tUser.usrName == '$this->username' AND tUser.usrActivated == TRUE");
-      $sqlResultCount = mysql_num_rows($sqlResult);
+      $result = mysql_query("SELECT COUNT(*) FROM tUser WHERE tUser.usrName = '" . $this->username . "' AND tUser.usrActiv = TRUE");
+      $sqlResultCount = mysql_result($result, 0);
       
       if ($sqlResultCount == 1)
       {
@@ -174,7 +174,7 @@ http://127.0.0.1/login.php?akey=$activationkey
 
 EOF;
 	  
-		sendEmail($this->username . " <" . $this->email . ">", "kebaparis.ch registration", $body);
+		//sendEmail($this->username . " <" . $this->email . ">", "kebaparis.ch registration", $body);
       
 
 	}
@@ -199,7 +199,7 @@ EOF;
 	//check validation link <> user
     public function checkActivationLink($linkSent) {
 
-		$sqlResult = mysql_query("UPDATE tUser SET tUser.usrActivated = TRUE WHERE tUser.usrActivationtionkey = '$linkSent'");
+		$sqlResult = mysql_query("UPDATE tUser SET tUser.usrActiv = TRUE WHERE tUser.usrActivationtionkey = '$linkSent'");
 
 		if  ($sqlResult) {
 			$this->makeSessionUsable(); //login
@@ -309,6 +309,10 @@ EOF;
         //drop user OR set user inactive
         //reutn true if user dropped or not exsisted
         //return false if user not droped
+        
+        mysql_query("UPDATE tUser SET ");
+        
+        
     }
 
 	//runs every time the reference is droped
@@ -341,7 +345,7 @@ class Database {
 		if (!isset($this->db_handler)) {
 			$this->db_handler = mysql_connect($this->db_server, $this->db_user, $this->db_password) or die ("connect to db failed!");
 			mysql_select_db($this->db_name, $this->db_handler) or die ("select of db failed!");
-			echo "db conected: " . $this->db_server . "</br>";
+			//echo "db conected: " . $this->db_server . "</br>";
 		}
 	
 	}
@@ -352,7 +356,7 @@ class Database {
 		if (isset($this->db_handler)) {
 			mysql_close($this->db_handler);
 			$this->db_handler = NULL;
-			echo "db disconnected: " . $this->db_server;
+			//echo "db disconnected: " . $this->db_server;
 		}
 	
 	}
