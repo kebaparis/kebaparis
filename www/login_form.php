@@ -4,10 +4,18 @@
 	error_reporting(E_ALL);
 
 include 'classes.php';
+$myDB = new Database();
+$myDB->connect();
 
-$myuser = new user("koma5", "12345", "mkoch@hsr.ch");
-$myuser->sendActivationEmail();
-echo $myuser->registrationPossible();
+$myuser = new user("koma9", "12345", "balhhhhh@5th.ch");
+//$myuser->register();
+echo $myuser->registrationPossible() . "<br />";
+//$myuser->sendActivationEmail();
+//echo $myuser->registrationPossible();
+
+
+$myDB->quit();
+
 
 ?>
 
@@ -15,8 +23,8 @@ echo $myuser->registrationPossible();
         <tr>
         
           <td>
-            <form action="#" method="get">
             <label>username<label>
+            <form action="#" method="get">
             <input type="text" name="username" />
           </td>
           

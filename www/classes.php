@@ -9,16 +9,11 @@ public $email;
 private $activated;
 private $emailCount;
 private $session_id;
+private $ip;
+
+private $minRegDelay; //delay
 
 private $CookieLifeTime;
-
-//db
-private $db_handler;
-private $db_server;
-private $db_user;
-private $db_password;
-private $db_name;
-
 
 private $SALT_LENGTH;
 
@@ -30,14 +25,11 @@ private $SALT_LENGTH;
 		//create useless session
 		$this->createSession();
 		
-		include 'db_config.php';
-		
-		$this->CookieLifeTime = 60*60*24*50;
+		$this->CookieLifeTime = 60*60*24*50; // 50 days
+		$this->minRegDelay = 60; // one day 60*60*24
 		$this->SALT_LENGTH = 32;
 
-		$this->db_handler = mysql_connect($this->db_server, $this->db_user, $this->db_password) or die ("connect to db failed!");
-		mysql_select_db($this->db_name, $this->db_handler) or die ("select of db failed!");
-		echo "db conected: " . $this->db_server . "</br>";
+		$this->ip = $_SERVER['REMOTE_ADDR'];
 		
 		$this->username = $newUsername;
 		$this->password['plaintext'] = $newPassword;
@@ -50,17 +42,55 @@ private $SALT_LENGTH;
 		//check time between last registration from IP (too many sign ups from your ip)
 		//username allredy used
 		//email allredy used
+		$errorCode = 0;
+		$error = NULL;
+		
 
 		$result = mysql_query("
-			  SELECT COUNT(*) FROM tUser WHERE tUser.usrName = '" . $this->username . "' OR tUser.usrEmail = '" . $this->email . "'
+			SELECT UNIX_TIMESTAMP(MAX(usrCreated)) FROM tUser WHERE tUser.usrIP = '" . $this->ip . "'
 		");
-		$count = mysql_result($result, 0);
+		
+		$usrCreated = mysql_result($result, 0);
+		
+		if ( time() - $usrCreated < $this->minRegDelay ) {
+			$errorCode = 10;
+		}
+		
+		
+		$result = mysql_query("
+			SELECT COUNT(*) FROM tUser WHERE tUser.usrName = '" . $this->username . "'
+		");
+		if (mysql_result($result, 0) > 0) {
+			$errorCode = 11;
+		}
+
+		$result = mysql_query("
+			SELECT COUNT(*) FROM tUser WHERE tUser.usrEmail = '" . $this->email . "'
+		");
+		if (mysql_result($result, 0) > 0) {
+			$errorCode = 12;
+		}
+		
+
 		
 		
 		
+		switch ($errorCode) {
+			case 0:
+				$error = true;
+				break;
+			case 10:
+				$error = "to much registrattions from your IP";
+				break;
+			case 11:
+				$error = "username allready used";
+				break;
+			case 12:
+				$error = "email allready used";
+				break;
+		}
 		
-	  
-	  return $count;
+		return $error;
 	  
 	  
       //return exact faillure
@@ -82,12 +112,12 @@ private $SALT_LENGTH;
 	  //if ($this->registrationPossible() == true) {
         if (true == true) {
        	  
-       	  
 		  mysql_query("
-			  INSERT INTO tUser (usrName, usrPassword, usrSalt, usrEmail)
-			  VALUES ('" . $this->username . "', '" . $this->password['hash'] . "', '" . $this->password['salt'] . "', '" . $this->email . "')
+			  INSERT INTO tUser (usrName, usrPassword, usrSalt, usrEmail, usrIP)
+			  VALUES ('" . $this->username . "', '" . $this->password['hash'] . "', '" . $this->password['salt'] . "', '" . $this->email . "', '" . $this->ip . "')
 		   ");
-       	  
+		   
+		   
 	  
 			$this->sendActivationEmail();
 		return true;
@@ -130,7 +160,9 @@ private $SALT_LENGTH;
 	
 	  $activationkey = md5(uniqid(rand() * rand(), true) . $this->username);
 	  
-	  $bool = mysql_query("UPDATE tUser SET tUser.usrActivationtionkey = '$activationkey', usrActivationtionkeysent = usrActivationtionkeysent+1 WHERE tUser.usrName = '$this->username'");
+	$bool = mysql_query("
+		UPDATE tUser SET tUser.usrActivationtionkey = '$activationkey', usrActivationtionkeysent = usrActivationtionkeysent+1 WHERE tUser.usrName = '$this->username'
+	");
       
 		$body = <<<EOF
 Hello Hello $this->username,
@@ -156,7 +188,7 @@ EOF;
 		}
 		else
 		{
-			$salt = substr($salt, 0, $this->$SALT_LENGTH);
+			$salt = substr($salt, 0, $this->SALT_LENGTH);
 		}
 
 		return $salt . ";" . md5($salt . $plainText);
@@ -170,7 +202,7 @@ EOF;
 		$sqlResult = mysql_query("UPDATE tUser SET tUser.usrActivated = TRUE WHERE tUser.usrActivationtionkey = '$linkSent'");
 
 		if  ($sqlResult) {
-			$this->makeSessionUsable();
+			$this->makeSessionUsable(); //login
 			return true;
 		}
 		else {
@@ -218,7 +250,7 @@ EOF;
 	
 	//makeSessionUsable > login
     public function makeSessionUsable() {
-      //checkSession() if allready loged in
+      //checkLogin() if allready loged in
         // or modify session (rewrite session variable valide checkValidation())
       //not allready loged in
         //check email or username | password
@@ -252,7 +284,7 @@ EOF;
 
 	//destroy session > logout
     public function destroySession() {
-      //if checkSession true then
+      //if checkLogin true then
         //destroy session
         //return true
       //else
@@ -261,7 +293,7 @@ EOF;
 
 
 	//check Session > check login
-    public function checkSession() {
+    public function checkLogin() {
         //check session variable loggded in
       if ($_SESSION['logedin'] == true) {
         return true;
@@ -281,8 +313,7 @@ EOF;
 
 	//runs every time the reference is droped
 	public function __destruct() {
-		mysql_close($this->db_handler);
-		echo "db disconnected: " . $this->db_server;
+		//db
 	}
    
    
@@ -290,8 +321,52 @@ EOF;
 
 } //end class user
 
+class Database {
+
+	private $db_handler;
+	private $db_server;
+	private $db_user;
+	private $db_password;
+	private $db_name;
 
 
+
+	public function __construct() {
+		include 'db_config.php';
+	}
+	
+	
+	public function connect() {
+
+		if (!isset($this->db_handler)) {
+			$this->db_handler = mysql_connect($this->db_server, $this->db_user, $this->db_password) or die ("connect to db failed!");
+			mysql_select_db($this->db_name, $this->db_handler) or die ("select of db failed!");
+			echo "db conected: " . $this->db_server . "</br>";
+		}
+	
+	}
+	
+	
+	public function quit() {
+	
+		if (isset($this->db_handler)) {
+			mysql_close($this->db_handler);
+			$this->db_handler = NULL;
+			echo "db disconnected: " . $this->db_server;
+		}
+	
+	}
+
+	
+	public function __destruct() {
+	$this->quit();
+	
+	}
+
+
+
+
+}
 
 
 function sendEmail($recipient, $subject, $body) {
