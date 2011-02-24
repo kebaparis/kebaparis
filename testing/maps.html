@@ -10,8 +10,14 @@
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    var map = new google.maps.Map(document.getElementById("map"), myOptions);
-               
+    var mapDiv = document.getElementById("map");
+    var map = new google.maps.Map(mapDiv, myOptions);
+    
+
+    google.maps.event.addDomListener(mapDiv, 'resize', function() {
+      alert("new size detected.");
+       google.maps.event.trigger(map, 'resize');
+    });     
                 var marker = new google.maps.Marker({
                
                                position: latlng,
@@ -73,9 +79,58 @@
   }
  
 </script>
+
+  <script type="text/javascript">
+  
+  function changeMap() {
+    var map = document.getElementById("map");
+    
+    var currentClass = map.getAttribute("class");
+    var currentClass = map.getAttribute("className");
+    
+    if (currentClass == "normalmap") {
+        	map.setAttribute("class", "fullscreenmap"); //For Most Browsers
+      	map.setAttribute("className", "fullscreenmap"); //For IE; harmless to other browsers.
+	}
+	else {
+     	map.setAttribute("class", "normalmap"); //For Most Browsers
+      	map.setAttribute("className", "normalmap"); //For IE; harmless to other browsers.
+	
+	}
+	
+	
+  }
+  
+  </script>
+
+  <style type="text/css">
+  
+  body {
+    background-color:lightgray;
+    margin:0px;
+    padding:0px;
+  }
+  
+  .normalmap
+  {
+    width:100%;
+    height:50%;
+  }
+  
+  .fullscreenmap
+  {
+    width:100%;
+    height:94%;
+  }
+  
+  
+  </style>
+
+
 </head>
 <body onload="initialize()">
-                <div id="markerStatus" style="width:100%; height:5%"></div>
-                <div id="map" style="width:100%; height:95%"></div>
+                <input type="button" value="fullscreen" onclick="JavaScript:changeMap()">
+                <div id="markerStatus" style="width:100%; height:3%"></div>
+                <div id="map" class="normalmap"></div>
 </body>
 </html>
