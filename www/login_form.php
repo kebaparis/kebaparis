@@ -7,11 +7,18 @@ include 'classes.php';
 $myDB = new Database();
 $myDB->connect();
 
-$myuser = new user("koma6", "12345", "mkoch@hsr.ch");
-$myuser->register();
+$myuser = new user("marco", "12345", "mkoch@hsr.ch");
+$myuser->removeUser();
+//$myuser->register();
 //echo $myuser->registrationPossible() . "<br />";
 //$myuser->checkActivationLink("fecf5c6ea46c7b57c73016b2773aa2d1"); //working
 //$myuser->sendActivationEmail(); //working
+
+
+if (isset($_REQUEST['akey'])) {
+	$myuser->checkActivationLink($_REQUEST['akey']);
+}
+
 
 
 

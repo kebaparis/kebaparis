@@ -24,7 +24,7 @@ private $SALT_LENGTH;
 		$this->createSession();
 		
 		$this->CookieLifeTime = 60*60*24*50; // 50 days
-		$this->minRegDelay = 60; // one day 60*60*24
+		$this->minRegDelay = 20; // one day 60*60*24
 		$this->SALT_LENGTH = 32;
 
 		$this->ip = $_SERVER['REMOTE_ADDR'];
@@ -169,12 +169,13 @@ Hello Hello $this->username,
 
 your activation key 
 http://kebaparis.ch/login.php?akey=$activationkey
-http://127.0.0.1/login.php?akey=$activationkey
+	#dev purposes
+	http://127.0.0.1/dev/kebaparis/www/login_form.php?akey=$activationkey
 
 
 EOF;
 	  
-		//sendEmail($this->username . " <" . $this->email . ">", "kebaparis.ch registration", $body);
+		sendEmail($this->username . " <" . $this->email . ">", "kebaparis.ch registration", $body);
       
 
 	}
@@ -304,14 +305,21 @@ EOF;
 		
     }
 
-	//remove user
+	//set user inactive
     public function removeUser() {
         //drop user OR set user inactive
         //reutn true if user dropped or not exsisted
         //return false if user not droped
         
-        mysql_query("UPDATE tUser SET ");
+        $bool = mysql_query("UPDATE tUser SET tUser.usrActiv = FAlSE WHERE tUser.usrName = '" . $this->username . "' AND tUser.usrActiv = TRUE");
         
+		if ($bool) {
+			echo "user was active ...";
+		
+		} else {
+			echo "user was not active...";
+		
+		}
         
     }
 
