@@ -1,10 +1,31 @@
-function gmap () {
+function gmap (inputId) {
+var mapDivId = inputId;
 var map;
 
-this.resize = function() {
-	console.log("resize function");
-	google.maps.event.trigger(map, 'resize');
-}
+	this.makeFullscreen = function() {
+		console.log("makeFullscreen()");
+		var map = document.getElementById(mapDivId);
+		
+		var currentClass = map.getAttribute("class");
+		//var currentClass = map.getAttribute("className");
+		
+		if (currentClass == "normalmap") {
+			map.setAttribute("class", "fullscreenmap"); //For Most Browsers
+			map.setAttribute("className", "fullscreenmap"); //For IE; harmless to other browsers.
+		}
+		else {
+			map.setAttribute("class", "normalmap"); //For Most Browsers
+			map.setAttribute("className", "normalmap"); //For IE; harmless to other browsers.
+		}
+		
+		this.resize();
+	}
+
+
+	this.resize = function() {
+		console.log("resize()");
+		google.maps.event.trigger(map, 'resize');
+	}
 
 
 
@@ -16,7 +37,7 @@ this.resize = function() {
 		  center: latlng,
 		  mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
-		var mapDiv = document.getElementById("map");
+		mapDiv = document.getElementById(mapDivId);
 		map = new google.maps.Map(mapDiv, myOptions);
 		
 																					/*
@@ -93,5 +114,3 @@ this.resize = function() {
 	console.log("map initialized");
 	}; //end initialize
 }
-
-gmap.prototype.map = "";
