@@ -64,16 +64,18 @@ var map;
 								   draggable: true,
 								   title:"my fucking Dürüm!"
 					});
-	 
+					console.log("set marker");
 					marker.setMap(map);
 				   
 					google.maps.event.addListener(marker, "dragstart", function() {
-								   updateMarkerStatus("dragging...");
+						console.log("dragging...");
+						updateMarkerStatus("dragging...");
 					});
 	 
 					google.maps.event.addListener(marker, "dragend", function() {
 						var newPosition = marker.getPosition();
 						var Location = getCity(newPosition);
+						//console.log("draggend: " . newPosition);
 						updateMarkerStatus(newPosition);
 					});
 				   
@@ -91,22 +93,24 @@ var map;
 								  geocoder = new google.maps.Geocoder();
 								  geocoder.geocode({'latLng': latlng}, function(results, status) {
 										if (status == google.maps.GeocoderStatus.OK) {
-											if (results[1]) {
-												//alert("got answer..");
+											if (results[0]) {
+												for(i=0; i<50; i++) { 
+													//console.log(results[i]); 
+													console.log(results[0].address_components[1].long_name);
+												}
 												address = results[0].formatted_address;
 											}
 										}
 										else {
 										  address = "Geocoder failed due to: " + status;
 										}
-										//alert("1 " + address);
+										console.log(address);
 										callback(address);
 
 								  });
 								  
 								  function callback(input) {
 									document.getElementById('markerStatus').innerHTML = document.getElementById('markerStatus').innerHTML + address;
-									//alert("2 " + input);
 								  } // end callback
 
 								 
