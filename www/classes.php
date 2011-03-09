@@ -91,20 +91,18 @@ private $SALT_LENGTH;
        	  
           $saltAndHash = $this->generateHash($this->password['plaintext']);
           list($this->password['salt'], $this->password['hash']) = explode(";", $saltAndHash, 2);
-  
-       	  
-       	  
+
+
 		  mysql_query("
 			  INSERT INTO tUser (usrName, usrPassword, usrSalt, usrEmail, usrIP)
 			  VALUES ('" . $this->username . "', '" . $this->password['hash'] . "', '" . $this->password['salt'] . "', '" . $this->email . "', '" . $this->ip . "')
 		   ");
-		   
-		   
-	  
+
+
 			$this->sendActivationEmail();
       		return true;
 	  }
-	  
+
 	 switch ($errorCode) {
         case 0:
           echo "registred sucessfully";
@@ -141,9 +139,7 @@ private $SALT_LENGTH;
         return false;
       }
 
-      
-      
-    }   
+    }
 
 	//send validation Email
     public function sendActivationEmail() {
@@ -243,6 +239,8 @@ EOF;
 			session_set_cookie_params($this->CookieLifeTime);
 			session_start();
 			//standart values
+			$_SESSION['username'] = $this->username;
+			$_SESSION['email'] = $this->email;
 			$_SESSION['logedin'] = false;
 			$_SESSION['activated'] = false;
 			$_SESSION['type'] = "user";
@@ -264,11 +262,42 @@ EOF;
 		$_SESSION['username'] = $this->username;
 		$_SESSION['email'] = $this->email;
 		$_SESSION['logedin'] = true;
-		$_SESSION['type'] = "user";
+		$_SESSION['type'] = "user"; //user type query
 		$_SESSION['activated'] = $this->checkActivationDB();
 	  
 	  
     }
+	
+	public function login($password) {
+		
+		$this->password['plaintext'] = $password;
+		
+		$rawResult = mysql_query("SELECT usrPassword, usrSalt FROM tUser WHERE tUser.usrName = '$this->username'");
+		$count = mysql_num_rows($rawResult);
+		
+		if ($count == 1) {
+			$result = mysql_fetch_array($rawResult);
+			$this->password['hash'] = $result['usrPassword'];
+			$this->password['salt'] = $result['usrSalt'];
+		}
+		else {
+			$error = false;
+		}
+		
+		$sentHash = md5($this->password['salt'] . $this->password['plaintext']);
+		
+		if ($sentHash == $this->password['hash']) {
+			echo "correct!!";
+			$this->makeSessionUsable();
+		}
+		else {
+			echo "false...";
+		
+		}
+		
+		return $error;
+	}
+	
     
 	//check validation in Session
     public function checkValidationSession() {
@@ -307,18 +336,18 @@ EOF;
 
 	//set user inactive
     public function removeUser() {
-        //drop user OR set user inactive
-        //reutn true if user dropped or not exsisted
-        //return false if user not droped
-        
-        $bool = mysql_query("UPDATE tUser SET tUser.usrActiv = FAlSE WHERE tUser.usrName = '" . $this->username . "' AND tUser.usrActiv = TRUE");
-        
+		//
+		
+		$bool = $this->checkActivationDB();
+
 		if ($bool) {
-			echo "user was active ...";
-		
-		} else {
-			echo "user was not active...";
-		
+			mysql_query("UPDATE tUser SET tUser.usrActiv = FAlSE WHERE tUser.usrName = '" . $this->username . "'");
+			echo "user was active ... not anymore!";
+			return true; 
+		}
+		else {
+			echo "user was not active or did not exist...";
+			return false;
 		}
         
     }

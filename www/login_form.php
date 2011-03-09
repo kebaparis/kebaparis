@@ -7,9 +7,10 @@ include 'classes.php';
 $myDB = new Database();
 $myDB->connect();
 
-$myuser = new user("marco", "12345", "mkoch@hsr.ch");
-$myuser->removeUser();
+$myuser = new user("blahhh", "12345", "marco.koch@hsr.ch");
+//$myuser->removeUser();
 //$myuser->register();
+$myuser->login('12345');
 //echo $myuser->registrationPossible() . "<br />";
 //$myuser->checkActivationLink("fecf5c6ea46c7b57c73016b2773aa2d1"); //working
 //$myuser->sendActivationEmail(); //working
