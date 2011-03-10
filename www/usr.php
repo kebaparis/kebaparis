@@ -76,6 +76,14 @@
 
 
   function def() {
+  
+    $myuser = new user();
+    
+    if ($myuser->checkLogin()) {
+      echo "logged in... $myuser->username";
+    }
+    else {
+      //login form
     ?>
 <table>
   <tr>
@@ -99,6 +107,8 @@
   </tr>
 </table>
     <?php
+    } //end else
+    
   } // end def()
 
 

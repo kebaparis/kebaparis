@@ -29,9 +29,16 @@ private $SALT_LENGTH;
 
 		$this->ip = $_SERVER['REMOTE_ADDR'];
 		
-		$this->username = $newUsername;
+		//take value of attribute else take it from the session
+		if (isset($newUsername)) { $this->username = $newUsername; }
+		else { $this->username = $_SESSION['username'];}
+		
 		$this->password['plaintext'] = $newPassword;
-		$this->email = $newEmail;
+		
+		//take value of attribute else take it from the session
+		if (isset($newEmail)) { $this->email = $newEmail; echo " username from attribute <br />";}
+		else { $this->email = $_SESSION['email']; echo "username from session <br />";}
+		
 		echo "class constructed: " . $this->username . "</br>";
 	}
 
@@ -239,8 +246,6 @@ EOF;
 			session_set_cookie_params($this->CookieLifeTime);
 			session_start();
 			//standart values
-			$_SESSION['username'] = $this->username;
-			$_SESSION['email'] = $this->email;
 			$_SESSION['logedin'] = false;
 			$_SESSION['activated'] = false;
 			$_SESSION['type'] = "user";
@@ -320,6 +325,11 @@ EOF;
       //else
       //return false
     }
+    
+    	//set session variable logedin to false
+    public function logout() {
+      $_SESSION['logedin'] = false;
+    }
 
 
 	//check Session > check login
@@ -329,7 +339,7 @@ EOF;
         return true;
       }
       else {
-        return false;
+        return false; //return false
       }
 		
     }
