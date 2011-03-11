@@ -5,6 +5,7 @@ class user {
 public $username;
 public $password;
 public $email;
+public $type;
 
 private $activated;
 private $emailCount;
@@ -18,7 +19,7 @@ private $CookieLifeTime;
 private $SALT_LENGTH;
 
 	//runs every time a new reference is created
-	public function __construct($newUsername, $newPassword, $newEmail) {
+	public function __construct($newUsername = NULL, $newPassword = NULL, $newEmail = NULL) {
 	
 		//create useless session
 		$this->createSession();
@@ -164,7 +165,7 @@ private $SALT_LENGTH;
 	  $activationkey = md5(uniqid(rand() * rand(), true) . $this->username);
 	  
 	$bool = mysql_query("
-		UPDATE tUser SET tUser.usrActivationtionkey = '$activationkey', usrActivationtionkeysent = usrActivationtionkeysent+1 WHERE tUser.usrName = '$this->username'
+		UPDATE tUser SET tUser.usrActivationkey = '$activationkey', usrActivationkeysent = usrActivationkeysent+1 WHERE tUser.usrName = '$this->username'
 	");
       
 		$body = <<<EOF
@@ -173,7 +174,7 @@ Hello Hello $this->username,
 your activation key 
 http://kebaparis.ch/login.php?akey=$activationkey
 	#dev purposes
-	http://127.0.0.1/dev/kebaparis/www/login_form.php?akey=$activationkey
+	http://127.0.0.1/dev/kebaparis/www/usr.php?akey=$activationkey&rtype=act
 
 
 EOF;
@@ -203,9 +204,15 @@ EOF;
 	//check validation link <> user
     public function checkActivationLink($linkSent) {
 
-		$sqlResult = mysql_query("UPDATE tUser SET tUser.usrActiv = TRUE WHERE tUser.usrActivationtionkey = '$linkSent'");
+		$sqlResult = mysql_query("UPDATE tUser SET tUser.usrActiv = TRUE WHERE tUser.usrActivationkey = '$linkSent'");
 
-		if  ($sqlResult) {
+		if ($sqlResult) {
+			$user = mysql_query("SELECT usrName, usrEmail, usrType FROM tUser WHERE tUser.usrActivationkey = '$linkSent'");
+			$userrow = mysql_fetch_array($user);
+			$this->username = $userrow['usrName'];
+			$this->email = $userrow['usrEmail'];
+			$this->type = $userrow['usrType'];
+			
 			$this->makeSessionUsable(); //login
 			return true;
 		}
@@ -235,7 +242,8 @@ EOF;
 	private function createSession() {
 	
 		$this->session_id = session_id();
-		if(empty($this->session_id)) {
+		
+		if(!empty($this->session_id)) {
 			//create session if no jet existing
 			session_name('usr_session');
 			
@@ -249,7 +257,9 @@ EOF;
 			$_SESSION['logedin'] = false;
 			$_SESSION['activated'] = false;
 			$_SESSION['type'] = "user";
+			echo "new session created <br />";
 		}
+		echo "session_id: " . $this->session_id . "<br />";
 	}
 	
 	//makeSessionUsable > login
@@ -263,7 +273,7 @@ EOF;
           //return error
       //return true false
 	
-
+		echo "makeSessionUsable <- now logedin = true <br />";
 		$_SESSION['username'] = $this->username;
 		$_SESSION['email'] = $this->email;
 		$_SESSION['logedin'] = true;
@@ -292,12 +302,13 @@ EOF;
 		$sentHash = md5($this->password['salt'] . $this->password['plaintext']);
 		
 		if ($sentHash == $this->password['hash']) {
-			echo "correct!!";
+			echo "correct username und password!! <br />";
 			$this->makeSessionUsable();
+			$error = true;
 		}
 		else {
-			echo "false...";
-		
+			echo "failed to log in <br />";
+			$error = false;
 		}
 		
 		return $error;
@@ -364,7 +375,8 @@ EOF;
 
 	//runs every time the reference is droped
 	public function __destruct() {
-		//db
+		$_SESSION['username'] = $this->username;
+		$_SESSION['email'] = $this->email;
 	}
    
    

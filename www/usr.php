@@ -76,14 +76,14 @@
 
 
   function def() {
-  
+	echo "default requested <br />";
     $myuser = new user();
     
     if ($myuser->checkLogin()) {
       echo "logged in... $myuser->username";
     }
     else {
-      //login form
+      echo "user not logged in";
     ?>
 <table>
   <tr>
