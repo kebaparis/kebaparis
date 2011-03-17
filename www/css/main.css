@@ -36,6 +36,7 @@ a:hover {
 		#stand {
 			position:relative;
 			/*background-color:red;*/
+			margin-top: 10%;
 			width:650px;
 			height:300px;
 			left:38%; /* 62golden rule */
@@ -84,23 +85,58 @@ a:hover {
 }*/
 
 #login {
-	/*background-color:green;*/
+	background-color:green;
 	position:absolute;
-	top:10px;
-	right:10px;
-	padding-top: 5px;
-	padding-right:5px;
+	top:2px;
+	right:4px;
+	padding-top: 8px;
+	padding-bottom: 4px;
+	padding-left: 2%;
+	width: 35%;
+	height: 3%;
+	
+	/* curved */
+	-moz-border-radius: 0px 0px 20px 20px;
+	-webkit-border-radius: 0px 0px 20px 20px;
+	border-radius: 0px 0px 20px 20px;
+}
+
+
+#promo {
+	/* background-color: dodgerblue; */
+	position:absolute;
+	top: 40%;
+	left: 4px;
+	padding-top: 8px;
+	padding-bottom: 4px;
+	width: 3%;
+	height: 21%;
+}
+#promo td {
+	vertical-align: middle;
+	background-color:green;
+	width: 100px;
+	height: 55px;
+	/* curved */
+	-moz-border-radius: 0px 20px 20px 0px;
+	-webkit-border-radius: 0px 20px 20px 0px;
+	border-radius: 0px 20px 20px 0px;
 }
 
 /*** footer ***/
 #footer
 {
-	width: 85%;
-	height: 35px;
+	width: 75%;
+	height: 30px;
 	margin: 50px 100px auto auto;
+	padding-top: 12px;
 	background-color: red;
 
 	font-size: 14px;
 	text-align: center;
-}
+
+	-moz-border-radius: 0px 0px 15px 15px;
+	-webkit-border-radius: 0px 0px 15px 15px;
+	border-radius: 0px 0px 15px 15px;
+	}
 

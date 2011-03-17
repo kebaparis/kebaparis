@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-  
-  
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    
-    <style type="text/css">
-    
-      /* ... #blahh {  } ... */
-    
-    </style>
-  
-  
-  </head>
 
+  <?php include 'header.php'; ?>
+  
+  
   <body>
   
     <div id="login">
     
-      <?php include 'login_form.php'; ?>
+      <!--  <?php include 'usr.php'; ?> -->
+	  <table>
+	  <tr>
+	  
+		<td>
+		  <label>username<label>
+		  <!-- <form action="#" method="get"> -->
+		  <input type="text" name="username" />
+		</td>
+		
+		<td>
+		  <label>password<label>
+		  <input type="password" name="password" />
+		</td>
+		
+		<td>
+		  <input type="submit" value="login" />
+		  </form>
+		</td>
+		
+	  </tr>
+	</table>
+
       
     </div> <!-- end div #login -->
  
@@ -47,6 +59,19 @@
     
 	</div> <!-- end #stand -->
 
+	<div id="promo">
+		<table>
+			<tr>
+				<td> Facebonk </td>
+			</tr>
+			<tr>
+				<td> Twitta</td>
+			</tr>
+			<tr>
+				<td> Mailah </td>
+			</tr>
+		</table>
+	</div>
     <!--
     <div id="drminfo">
   		<table>
@@ -58,9 +83,7 @@
   	 </div> -->
 
 
-	 <div id="footer">
-		<p> feedback@kebaparis.ch </p>  
-	 </div>
+	 <?php include 'footer.php'; ?>
 	 
   </body>
 
