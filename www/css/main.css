@@ -101,6 +101,17 @@ a:hover {
 	border-radius: 0px 0px 20px 20px;
 }
 
+#search {
+	/* background-color: green; */
+	position: absolute;
+	top: 3%;
+	left: 10%;
+	
+	}
+
+#search table	{
+	width: 250px;
+	}
 
 #promo {
 	/* background-color: dodgerblue; */
@@ -126,12 +137,12 @@ a:hover {
 /*** footer ***/
 #footer
 {
+	background-color: dodgerblue;
 	width: 75%;
 	height: 30px;
-	margin: 50px 100px auto auto;
+	margin: 250px auto auto auto;
 	padding-top: 12px;
-	background-color: red;
-
+	
 	font-size: 14px;
 	text-align: center;
 
