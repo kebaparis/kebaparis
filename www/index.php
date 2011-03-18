@@ -60,27 +60,10 @@
 				<td id="ort" colspan="3">Stäfa</td>
 			</tr>
 
-			<tr>
-				<td colspan="2" id="trate"> <a href"#"> 
-				<!-- table in table :o -->
-					<table id="rate">
-						<tr>
-							<td> Preis / Leistung: * * * * *</td>
-						</tr>
-						<tr>
-							<td> Preis / Leistung: * * * * </td>
-						</tr>
-						<tr> 
-							<td> Preis / Leistung: * * *</td> 
-						</tr>
-						<tr> 
-							<td> Preis / Leistung: * *</td> 
-						</tr>
-					</table>		
-				<!-- end table in table :D -->		
-				
-				</a> </td>
-				<td id="edit"> <a href"#">  </a> </td>
+			<tr id="buttons">
+				<td> <a href"#"> <a href=""> rate </a> </td>
+				<td> <a href"#"> <a href=""> Edit </a> </td>
+				<td> <a href"#"> <a href=""> New  </a> </td>
 			</tr>
 
 		</table>
@@ -90,13 +73,13 @@
 	<div id="promo">
 		<table>
 			<tr>
-				<td> Facebonk </td>
+				<td> <a href=""> Facebonk </a> </td>
 			</tr>
 			<tr>
-				<td> Twitta</td>
+				<td> <a href=""> Twitta </a> </td>
 			</tr>
 			<tr>
-				<td> Mailah </td>
+				<td> <a href=""> Mailah </a> </td>
 			</tr>
 		</table>
 	</div>
