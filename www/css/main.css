@@ -34,38 +34,57 @@ a:hover {
 
 /*** layout ***/
 		#stand {
-			position:relative;
-			/*background-color:red;*/
+			position: relative;
+			background-color: grey;
 			margin-top: 10%;
 			width:650px;
 			height:300px;
-			left:38%; /* 62golden rule */
-			right:62%;
+			/* 62golden rule */
+			right: 0%;
+			left: 20%;
 		}
-
+		
 		#stand table{
-			height:100%;
-			width:100%;
-		}
-
+			height: 100%;
+			width: 100%;
+		} 
+		
 		#stand table tr td {
 			border:1px solid black;
 			vertical-align:middle;
-		}
-
+		} 
+		
 		#map {
 			vertical-align:middle;
 			text-align:center;
 			width:300px;
 			height:300px;
 		}
-
+		#ort{
+		height: 45px;
+		text-align: center;
+		}
+		/* style for main table rate */
+		#trate{
+		width: 200px;
+		height: 210px;
+		}
+		
+		/* style for under table in rate */
+		#rate td{		
+		height: 40px;		
+		}
+		
+		#edit{
+		width: 100px;
+		}
+		/* 
 		#buttons td{
 			text-align:left;
 			vertical-align:bottom;
 			height:40px;
 			width:33%;
-		}
+		} */
 
 
 
@@ -110,7 +129,7 @@ a:hover {
 	}
 
 #search table	{
-	width: 250px;
+	width: 300px;
 	}
 
 #promo {
