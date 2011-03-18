@@ -64,27 +64,13 @@ a:hover {
 		height: 45px;
 		text-align: center;
 		}
-		/* style for main table rate */
-		#trate{
-		width: 200px;
-		height: 210px;
-		}
 		
-		/* style for under table in rate */
-		#rate td{		
-		height: 40px;		
+		 
+		#buttons td {
+		width: 150px;
+		height: 100%;
+		background-color: blue;
 		}
-		
-		#edit{
-		width: 100px;
-		}
-		/* 
-		#buttons td{
-			text-align:left;
-			vertical-align:bottom;
-			height:40px;
-			width:33%;
-		} */
 
 
 
