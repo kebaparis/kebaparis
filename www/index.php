@@ -10,23 +10,24 @@
     <div id="login">
     
       <!--  <?php include 'usr.php'; ?> -->
+      
 	  <table>
 	  <tr>
 	  
 		<td>
-		  <label>username<label>
-		  <!-- <form action="#" method="get"> -->
+		  <label> username </label>
+		  <!-- <form action="#" method="get">  -->
 		  <input type="text" name="username" />
 		</td>
 		
 		<td>
-		  <label>password<label>
+		  <label> password </label>
 		  <input type="password" name="password" />
 		</td>
 		
 		<td>
 		  <input type="submit" value="login" />
-		  </form>
+		  <!-- </form> -->
 		</td>
 		
 	  </tr>
@@ -34,7 +35,19 @@
 
       
     </div> <!-- end div #login -->
- 
+    
+    <div id="search">
+    <table>
+    	<tr> 
+    		<td> Search: </td>
+    		<td> <!-- dynamic search input --> </td>
+    		<td> <a href=""> Go </a> </tr>
+    	</tr>
+    	
+
+	</table>
+    </div>
+<!-- end div #search --> 
   
     <div id="stand">
 
@@ -72,6 +85,9 @@
 			</tr>
 		</table>
 	</div>
+	<!-- end #promo -->
+	
+	
     <!--
     <div id="drminfo">
   		<table>
