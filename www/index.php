@@ -40,11 +40,9 @@
     <table>
     	<tr> 
     		<td> Search: </td>
-    		<td> <!-- dynamic search input --> </td>
-    		<td> <a href=""> Go </a> </tr>
+    		<td> <input type="text" name="" value="" />  </td>
+    		<td> <a href=""> Go </a>
     	</tr>
-    	
-
 	</table>
     </div>
 <!-- end div #search --> 
@@ -55,17 +53,34 @@
 
 			<tr>
 				<td rowspan="3"><div id="map">map</div></td>
-				<td colspan="3"><h1>Seeperle<h1></td>
+				<td colspan="3" id="ort"><h1>Seeperle<h1></td>
 			</tr>
 
 			<tr>
-				<td colspan="3">Stäfa</td>
+				<td id="ort" colspan="3">Stäfa</td>
 			</tr>
 
-			<tr id="buttons">
-				<td><a href"#">rate</a></td>
-				<td><a href"#">social</a></td>
-				<td><a href"#">new</a></td>
+			<tr>
+				<td colspan="2" id="trate"> <a href"#"> 
+				<!-- table in table :o -->
+					<table id="rate">
+						<tr>
+							<td> Preis / Leistung: * * * * *</td>
+						</tr>
+						<tr>
+							<td> Preis / Leistung: * * * * </td>
+						</tr>
+						<tr> 
+							<td> Preis / Leistung: * * *</td> 
+						</tr>
+						<tr> 
+							<td> Preis / Leistung: * *</td> 
+						</tr>
+					</table>		
+				<!-- end table in table :D -->		
+				
+				</a> </td>
+				<td id="edit"> <a href"#">  </a> </td>
 			</tr>
 
 		</table>
