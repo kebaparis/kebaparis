@@ -116,7 +116,7 @@ private $SALT_LENGTH;
           echo "registred sucessfully";
           break;
         case 10:
-          echo "to much registrattions from your IP";
+          echo "to much registrations from your IP";
           break;
         case 11:
           echo "username allready used";
@@ -200,7 +200,6 @@ EOF;
 
 	}
 
-
 	//check validation link <> user
     public function checkActivationLink($linkSent) {
 
@@ -273,13 +272,35 @@ EOF;
           //return error
       //return true false
 	
+		//sql statements for session id information
+		$sessionmail= mysql_query("SELECT usrEmail FROM tUser WHERE tUser.usrName = '" . $this->username . "'");
+		while ($row = mysql_fetch_array($sessionmail)){
+			$email = $row['usrEmail'];
+			}
+			
+		$sessiontype= mysql_query("SELECT usrType FROM tUser WHERE tUser.usrName = '" . $this->username . "'");
+		while ($row = mysql_fetch_array($sessiontype)){
+			$type = $row['usrType'];
+			}
+			
 		echo "makeSessionUsable <- now logedin = true <br />";
 		$_SESSION['username'] = $this->username;
-		$_SESSION['email'] = $this->email;
+		$_SESSION['email'] = $email;
 		$_SESSION['logedin'] = true;
-		$_SESSION['type'] = "user"; //user type query
+		$_SESSION['type'] = $type;
 		$_SESSION['activated'] = $this->checkActivationDB();
-	  
+		
+		//0nly for testing
+		echo "Username: ";
+		echo $_SESSION['username'];
+		echo " E-mail: ";
+		echo $_SESSION['email'];
+		echo " Loggedin: ";
+		echo $_SESSION['logedin']; 
+		echo " type: ";		
+		echo $_SESSION['type'];
+		echo " activated: ";
+		echo $_SESSION['activated'];
 	  
     }
 	
@@ -474,9 +495,6 @@ function sendEmail($recipient, $subject, $body) {
 		echo("<p>Message successfully sent!</p>");
 	} */
 }
-
-
-
 
 
 ?>
