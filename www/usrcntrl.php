@@ -14,11 +14,23 @@ Hier können user einstellungen vorgenommen werde, sowie Statistiken werden ange
 		- Konto löschen
 */
 
+
+include 'header.php';
 include 'classes.php';
+
+
 $myDB = new Database();
 $myDB-> connect();
 
-$sql = mysql_query("select usrName,usrEmail,usrLastLogin, usrCreated from tUser where usrName like 'marco';");
+
+//Find username in session
+$myUser = new user("marco");
+echo $myUser->username;
+
+
+
+//$sql = mysql_query("select usrName,usrEmail,usrLastLogin, usrCreated from tUser where usrName = 'marco';");
+$sql = mysql_query("select usrName,usrEmail,usrLastLogin, usrCreated from tUser where usrName = '".$myUser->username."'");
 $num_rows = mysql_num_rows($sql);
 
 while ($row = mysql_fetch_array($sql)){
