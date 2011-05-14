@@ -1,3 +1,36 @@
 - user->__destruct() muss zuerst Daten aus den Attributen, dann aus der Session und zum Schuss aus der DB holen
 - user->logout() schreiben
 - login.php danach daten per POST ausser bei activation dort muss es per GET passieren
+
+
+LogIN
+?rtype=lin&username=arvet&password=12345
+
+LogOUt
+?rtype=lin
+
+
+[10:09:19 PM CEST] freak.x: also next step = funktion für die gsamt userclass wo vo session username uslist 
+und us dem ganz vieli schöni variable macht wie email , account created etc, denn muemmer insgesamt nur eimal es
+sql statement mache und chönds für alles verwende, zb. user control etc.  --> done;
+
+Session variable alli lösche usser username,  --> done;
+
+sowie bi logout session alles kille, --> done;
+
+sowie erst nach login session create.  --> done;
+
+
+
+#Arvet 02/05/2011
+
+Created in file classes.php --> public function usersession();
+usersession() working ! same variables as structure names;
+Added session destroy in function destroySession(); (classes.php)
+Created login on index.php page (from usr.php) 
+
+
+Die Variablen von "public function usersession()" müssen überall zugänglich sein, Wie?
+
+
+Error: In structure.sql = usrActiv  | Active !! with e ! change and change in every file?
