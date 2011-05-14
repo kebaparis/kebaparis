@@ -1,8 +1,7 @@
 USE fifthch_kebap;
 
-
-/* Abfrage stimmt mit DB nicht mehr überein, z.B usrActivated */
-INSERT INTO tUser (usrName, usrPassword, usrEmail, usrActivated, usrType)
+/* Angepasst */
+INSERT INTO tUser (usrName, usrPassword, usrEmail, usrActive, usrType)
 VALUES
 	('marco', MD5('1234'), 'marco@kebaparis.ch', TRUE, 'admin'),
 	('arvet', MD5('1234'), 'arvet@kebaparis.ch', TRUE, 'admin'),
