@@ -1,4 +1,6 @@
 <?php 
+
+session_start();
   
   include 'classes.php';
   $myDB = new Database();
@@ -38,8 +40,8 @@
     $User['password'] = $_REQUEST['password'];
     
     $myuser = new user($User['username']);
-    $myuser->login($User['password']);
-  
+    $myuser->login($User['username'],$User['password']);
+
   } // end lin()
 
   function lou() {
@@ -47,7 +49,8 @@
     //user class weiss den username aus der session
     
     $myuser = new user();
-    $myuser->logout();
+	$myuser->destroySession();
+    //$myuser->logout();
   
   } // end lou()
 
@@ -79,12 +82,38 @@
 	echo "default requested <br />";
     $myuser = new user();
     
-    if ($myuser->checkLogin()) {
-      echo "logged in... $myuser->username";
+	$myuser->checkValidationSession();
+	
+	if(isset($_POST['feld']) && $_POST['feld']=="1") {
+	echo lin();
+	?>
+	<!--  logout button / stuff here -->
+	<p> logout button here with link</p>
+	
+	<?php
+	}
+	else {
+    //if ($myuser->checkLogin()) {
+	
+    /*echo "logged in... $myuser->username";
     }
     else {
       echo "user not logged in";
+	*/
     ?>
+	
+<!-- Login test Arvet -->
+
+
+<form action="index.php" method="post">
+Username: <input type="text" name="username" size="15"> <br>
+Password: <input type="password" name="password" size="15"> <br>
+<input type="hidden" name="feld" value="1" />
+<input type="submit" />
+</form> 
+
+
+<!--
 <table>
   <tr>
   
@@ -106,8 +135,11 @@
     
   </tr>
 </table>
+
+-->
     <?php
-    } //end else
+	}
+    //end else } 
     
   } // end def()
 

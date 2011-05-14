@@ -18,6 +18,7 @@ private $CookieLifeTime;
 
 private $SALT_LENGTH;
 
+/* arvet
 	//runs every time a new reference is created
 	public function __construct($newUsername = NULL, $newPassword = NULL, $newEmail = NULL) {
 	
@@ -42,6 +43,7 @@ private $SALT_LENGTH;
 		
 		echo "class constructed: " . $this->username . "</br>";
 	}
+*/
 
 	//check registration possible
    public function registrationPossible() {
@@ -237,6 +239,7 @@ EOF;
 
     }
 
+/* arvet
 	//creates a usless standart session
 	private function createSession() {
 	
@@ -260,6 +263,7 @@ EOF;
 		}
 		echo "session_id: " . $this->session_id . "<br />";
 	}
+*/
 	
 	//makeSessionUsable > login
     public function makeSessionUsable() {
@@ -272,6 +276,7 @@ EOF;
           //return error
       //return true false
 	
+		/* If login work --> delete this comment
 		//sql statements for session id information
 		$sessionmail= mysql_query("SELECT usrEmail FROM tUser WHERE tUser.usrName = '" . $this->username . "'");
 		while ($row = mysql_fetch_array($sessionmail)){
@@ -282,17 +287,22 @@ EOF;
 		while ($row = mysql_fetch_array($sessiontype)){
 			$type = $row['usrType'];
 			}
+		*/
 			
-		echo "makeSessionUsable <- now logedin = true <br />";
+		// echo "makeSessionUsable <- now logedin = true <br />";
 		$_SESSION['username'] = $this->username;
+		$this->usersession();
+		
+		/*
+		If login work --> delete this comment
 		$_SESSION['email'] = $email;
 		$_SESSION['logedin'] = true;
 		$_SESSION['type'] = $type;
 		$_SESSION['activated'] = $this->checkActivationDB();
 		
+		
 		//0nly for testing
-		echo "Username: ";
-		echo $_SESSION['username'];
+		
 		echo " E-mail: ";
 		echo $_SESSION['email'];
 		echo " Loggedin: ";
@@ -301,23 +311,64 @@ EOF;
 		echo $_SESSION['type'];
 		echo " activated: ";
 		echo $_SESSION['activated'];
-	  
+		*/
     }
 	
-	public function login($password) {
+	//Set variables for current user session
+	public function usersession() {
+	
+	echo $this->username;
+	$sessionmail= mysql_query("SELECT usrID, usrName, usrPassword, usrEmail, usrType, usrActiv, usrIP,usrCreated, usrLastLogin FROM tUser WHERE tUser.usrName = '" . $this->username . "'");
+		while ($row = mysql_fetch_array($sessionmail)){
+			$usrID = $row['usrID'];
+			$usrName  = $row['usrName'];
+			$usrPassword  = $row['usrPassword'];
+			$usrEmail  = $row['usrEmail'];
+			$usrType  = $row['usrType'];
+			$usrActiv  = $row['usrActiv'];
+			$usrIP = $row['usrIP'];
+			$usrCreated = $row['usrCreated'];
+			$usrLastLogin = $row['usrLastLogin'];
+			}
+			
+	//Test variables
+	echo $usrID;
+	echo "|";
+	echo $usrName;
+	echo "|";
+	echo $usrPassword;
+	echo "|";
+	echo $usrEmail;
+	echo "|";
+	echo $usrType;
+	echo "|";
+	echo $usrActiv;
+	echo "|";
+	echo $usrIP;
+	echo "|";
+	echo $usrCreated;
+	echo "|";
+	echo $usrLastLogin;
+	
+	}
+	
+	public function login($username,$password) {
 		
+		$this->username = $username;
 		$this->password['plaintext'] = $password;
-		
-		$rawResult = mysql_query("SELECT usrPassword, usrSalt FROM tUser WHERE tUser.usrName = '$this->username'");
+		echo $username;
+		$rawResult = mysql_query("SELECT usrPassword, usrSalt FROM tUser WHERE tUser.usrName = '$username'");
 		$count = mysql_num_rows($rawResult);
 		
 		if ($count == 1) {
 			$result = mysql_fetch_array($rawResult);
 			$this->password['hash'] = $result['usrPassword'];
 			$this->password['salt'] = $result['usrSalt'];
+			echo ", yes we can ";
 		}
 		else {
 			$error = false;
+			echo ", no we can't ";
 		}
 		
 		$sentHash = md5($this->password['salt'] . $this->password['plaintext']);
@@ -335,22 +386,47 @@ EOF;
 		return $error;
 	}
 	
-    
+
 	//check validation in Session
     public function checkValidationSession() {
       //lookup in Session if valide
       //return true of false
-      if ($_SESSION['activated'] == true) {
+      /* if ($_SESSION['activated'] == true) {
         return true;
       }
       else {
         return false;
       }
       
+	  echo "after this: ";
+	  if (isset ($test->$usrName))
+		{
+		echo "Session Besteht :D";
+		}
+	  else 
+	  {
+		echo "Session Besteht nicht :(";
+	  }
+	  */
+
+	  
     } 
 
 	//destroy session > logout
     public function destroySession() {
+	//Warte für die Ausgabe des Headers (unten)
+	ob_start();
+	
+	session_start();
+	session_unset();
+	session_destroy();
+	
+	//Nach Session kill gehe zu --> index.php
+	header("Location: index.php");
+	ob_end_flush();
+	
+	
+	
       //if checkLogin true then
         //destroy session
         //return true
@@ -358,12 +434,14 @@ EOF;
       //return false
     }
     
-    	//set session variable logedin to false
+	/*
+    //set session variable logedin to false
     public function logout() {
       $_SESSION['logedin'] = false;
     }
-
-
+	*/
+	
+	/* arvet, not anymore --> checkValidationSession() for this check login
 	//check Session > check login
     public function checkLogin() {
         //check session variable loggded in
@@ -375,7 +453,7 @@ EOF;
       }
 		
     }
-
+	*/
 	//set user inactive
     public function removeUser() {
 		//
