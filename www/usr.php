@@ -59,8 +59,8 @@
     $newUser['password'] = $_REQUEST['password'];
     $newUser['email'] = $_REQUEST['email'];
     
-    $myuser = new user($newUser['username'], $newUser['password'], $newUser['email']);
-    $myuser->register();
+    $myuser = new user($newUser['username']);
+    $myuser->register($newUser['password'], $newUser['email']);
   
   } // end reg()
   
