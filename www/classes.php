@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 ob_start();
 
 class user {
@@ -380,7 +381,8 @@ EOF;
 	
     
 	//check validation in Session
-    public function checkValidationSession() {
+    public function checkValidationSession() 
+	{
       //lookup in Session if valide
       //return true of false
       if ($_SESSION['activated'] == true) {
@@ -408,12 +410,16 @@ EOF;
 
 
 	//check Session > check login
-    public function checkLogin() {
+    public function checkLogin() 
+	{
         //check session variable loggded in
-      if ($_SESSION['logedin'] == "true") {
-        return true;
-      }
-      else {
+		if ($_SESSION['logedin'] == "true") 
+		{
+			// fill in the username in the class variable for def() in usr.php
+			$this->usrName = $_SESSION["username"];
+			return true;
+		}
+		else {
         return false; //return false
       }
 		
