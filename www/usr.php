@@ -101,6 +101,7 @@
 		{
 			echo "not logged in";
 			printLoginForm();
+			printRegistrationForm();
 		} //end else
 
 	} // end def()
@@ -112,8 +113,8 @@
 		<table>
 			<tr>
 				<td>
-					<label>username<label>
 					<form>
+						<label>username<label>
 						<input type="text" name="username" id="username"/>
 				</td>
 				<td>
@@ -135,6 +136,36 @@
 		echo "logged in : $username";
 		echo "<a href='#' onClick='logout()'>Logout</a>";
 	}
-
+	
+	
+	// Print Registration Form, should open after jquery click
+	function printRegistrationForm()
+	{
+	?>
+	
+	<!-- usr.php?rtype=reg&username=arvet&password=asdf&email=arvet@kebaparis.ch -->
+		<table>
+			<tr>
+				<td>
+					<form>
+						<label>username<label>
+						<input type="text" name="username" id="username"/>
+				</td>
+				<td>
+						<label>password<label>
+						<input type="password" name="password" id="password"/>
+				</td>
+				<td>
+						<label>email<label>
+						<input type="text" name="email" id="email"/>
+				</td>
+				<td>
+						<a href="#" onClick="register()">Register</a>
+					</form>
+				</td>
+			</tr>
+		</table>
+	<?php
+	}
 
 ?>
