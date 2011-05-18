@@ -10,6 +10,8 @@ function createAJAXobject()
 	}
 } // end createAJAXobject()
 
+
+//Login
 function login()
 {
 	createAJAXobject();
@@ -34,6 +36,8 @@ function login()
 	xmlhttp.send();
 }
 
+
+//Logout
 function logout()
 {
 	createAJAXobject();
@@ -54,3 +58,30 @@ function logout()
 	xmlhttp.send();
 }
 
+//Register
+function reg()
+{
+	createAJAXobject();
+	
+	
+	var password = document.getElementById('password').value;
+	var email = document.getElementById('email').value;
+	
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		//alert("data get");
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+		{
+			//login ?
+			document.getElementById("login").innerHTML=xmlhttp.responseText;
+			//alert(xmlhttp.responseText);
+		}
+	}
+	var page = "usr.php?rtype=reg&username=" + username + "&password=" + password  + "&email=" + email;
+	//var page = "usr.php?rtype=lin&username=" + username + "&password=" + password;
+	
+	//alert(page);
+	xmlhttp.open("GET",page,true);
+	xmlhttp.send();
+}
