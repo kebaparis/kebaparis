@@ -59,7 +59,7 @@ function logout()
 }
 
 //Register
-function reg()
+function register()
 {
 	createAJAXobject();
 	
