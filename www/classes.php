@@ -86,7 +86,7 @@ private $SALT_LENGTH;
 		
 	}
 
-    	public function updateFromDB() {
+	public function updateFromDB() {
 
 	$sessionmail= mysql_query("
 	SELECT usrID, usrName, usrPassword, usrSalt, usrEmail, usrType, usrActivationkey, usrActiv, usrIP,usrCreated, usrLastLogin FROM tUser WHERE tUser.usrName = '" . $this->usrName . "'
@@ -106,7 +106,6 @@ private $SALT_LENGTH;
 			}
 
 	}
-
 
 	//check registration possible
    public function registrationPossible() {
@@ -442,6 +441,55 @@ EOF;
 		}
         
     }
+	
+	// check if the param password is the same as the current user password (marcel)
+	public function checkPassword($password)
+	{
+		//echo "PASSWORD from classes.php: $password";
+		if($password == "")
+		{
+			return false;
+		}
+		
+		$this->updateFromDB();
+		
+		$md5pw = md5($password);
+		
+		//echo $this->usrPassword['hash'];
+		//echo "MD5 PW: $md5pw";
+		
+		if($this->usrPassword['hash'] == $md5pw)
+		{
+			//echo $this->usrPassword['hash'];
+			return true;
+		}
+	}
+	
+	//changes the user password to the param password (marcel)
+	public function changePassword($newPassword)
+	{
+		if($newPassword == "")
+		{
+			return false;
+		}
+		
+		$this->updateFromDB();
+		
+		$pw = $this->generateHash($newPassword, $this->usrPassword['salt']);
+		
+		$updatepw = "UPDATE tUser SET tUser.usrPassword = '$pw' where tUser.usrID = " . $this->usrID;
+		
+		if(mysql_query($updatepw) == true)
+		{
+			//echo "password changed.";
+			return true;
+		}
+		else
+		{
+			//echo "error while changing password.";
+			return false;
+		}
+	}
 
 	//runs every time the reference is droped
 	public function __destruct() {
