@@ -63,9 +63,9 @@ function register()
 {
 	createAJAXobject();
 	
-	
-	var password = document.getElementById('password').value;
-	var email = document.getElementById('email').value;
+	var username = document.getElementById('usernameR').value;
+	var password = document.getElementById('passwordR').value;
+	var email = document.getElementById('emailR').value;
 	
 	
 	xmlhttp.onreadystatechange=function()
@@ -85,3 +85,5 @@ function register()
 	xmlhttp.open("GET",page,true);
 	xmlhttp.send();
 }
+
+//change password

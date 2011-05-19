@@ -149,15 +149,15 @@
 				<td>
 					<form>
 						<label>username<label>
-						<input type="text" name="username" id="username"/>
+						<input type="text" name="username" id="usernameR"/>
 				</td>
 				<td>
 						<label>password<label>
-						<input type="password" name="password" id="password"/>
+						<input type="password" name="password" id="passwordR"/>
 				</td>
 				<td>
 						<label>email<label>
-						<input type="text" name="email" id="email"/>
+						<input type="text" name="email" id="emailR"/>
 				</td>
 				<td>
 						<a href="#" onClick="register()">Register</a>
