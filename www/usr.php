@@ -45,6 +45,7 @@
 			//show login form if login failed
 			echo "not logged in";
 			printLoginForm();
+			printRegistrationForm();
 		}
 
 	} // end lin()
@@ -59,6 +60,7 @@
 
 		echo "logged out.";
 		printLoginForm();
+		printRegistrationForm();
 
 	} // end lou()
 
