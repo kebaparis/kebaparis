@@ -20,14 +20,38 @@
 
 
 	$myDB = new Database();
-	$myDB-> connect();
+	//$myDB-> connect();
 	?>
 	
 	<div class="coda-slider preload" id="settings-slider">
 		<div class="panel">
 			<div class="panel-wrapper">
 				<h2 class="title">Change password</h2>
-				<p>blabla</p>
+				<div id="changePasswordDiv">
+					<div id="statusHolder">
+						Here comes the status.
+					</div>
+					<form>
+						<table>
+							<tr>
+								<td>Current password</td>
+								<td><input type="password" name="currentPassword" id="oldPassword" /></td>
+							</tr>
+							<tr>
+								<td>New password</td>
+								<td><input type="password" name="newPassword" id="newPassword" /></td>
+							</tr>
+							<tr>
+								<td>Commit new password</td>
+								<td><input type="password" name="newPasswortCommitted" id="newPassword1" /></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><a href="#" onClick="changePassword()">Change</a></td>
+							</tr>
+						</table>
+					</form>
+				</div>
 			</div>
 		</div>
 		<div class="panel">

@@ -13,7 +13,7 @@
 /* Most common stuff you'll need to change */
 
 	.coda-slider-wrapper { padding: 20px 0 }
-	.coda-slider { background: #ebebeb }
+	.coda-slider { background: blue; }
 	
 	/* Use this to keep the slider content contained in a box even when JavaScript is disabled */
 	.coda-slider-no-js .coda-slider { height: 200px; overflow: auto !important; padding-right: 20px }
