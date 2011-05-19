@@ -112,24 +112,27 @@
 	function printLoginForm()
 	{
 		?>
-		<table>
-			<tr>
-				<td>
-					<form>
-						<label>username<label>
-						<input type="text" name="username" id="username"/>
-				</td>
-				<td>
-						<label>password<label>
-						<input type="password" name="password" id="password"/>
-				</td>
-				<td>
-				<!--<input type="submit" value="login" onClick="login()"/>-->
-						<a href="#" onClick="login()">Login</a>
-					</form>
-				</td>
-			</tr>
-		</table>
+		<div id="tlogin">
+			<table>
+				<tr>
+					<td>
+						<form>
+							<label>username<label>
+							<input type="text" name="username" id="username"/>
+					</td>
+					<td>
+							<label>password<label>
+							<input type="password" name="password" id="password"/>
+					</td>
+					<td>
+					<!--<input type="submit" value="login" onClick="login()"/>-->
+							<a href="#" onClick="login()">Login</a>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<a class="logino-loginc" href="#">Login</a>
 		<?php
 	} // end printLoginForm()
 
@@ -145,28 +148,31 @@
 	{
 	?>
 	
-	<!-- usr.php?rtype=reg&username=arvet&password=asdf&email=arvet@kebaparis.ch -->
-		<table>
-			<tr>
-				<td>
-					<form>
-						<label>username<label>
-						<input type="text" name="username" id="usernameR"/>
-				</td>
-				<td>
-						<label>password<label>
-						<input type="password" name="password" id="passwordR"/>
-				</td>
-				<td>
-						<label>email<label>
-						<input type="text" name="email" id="emailR"/>
-				</td>
-				<td>
-						<a href="#" onClick="register()">Register</a>
-					</form>
-				</td>
-			</tr>
-		</table>
+		<div id="treg">
+			<table>
+				<tr>
+					<td>
+						<form>
+							<label>username<label>
+							<input type="text" name="username" id="usernameR"/>
+					</td>
+					<td>
+							<label>password<label>
+							<input type="password" name="password" id="passwordR"/>
+					</td>
+					<td>
+							<label>email<label>
+							<input type="text" name="email" id="emailR"/>
+					</td>
+					<td>
+							<a href="#" onClick="register()">Register</a>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<!-- used for toggle-->
+		<a class="rego-regc" href="#">Register</a>
 	<?php
 	}
 
