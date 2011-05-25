@@ -132,7 +132,7 @@
 				</tr>
 			</table>
 		</div>
-		<a class="logino-loginc" href="#">Login</a>
+		<a class="tlogino-tloginc" href="#">Login</a>
 		<?php
 	} // end printLoginForm()
 
@@ -172,7 +172,7 @@
 			</table>
 		</div>
 		<!-- used for toggle-->
-		<a class="rego-regc" href="#">Register</a>
+		<a class="trego-tregc" href="#">Register</a>
 	<?php
 	}
 
