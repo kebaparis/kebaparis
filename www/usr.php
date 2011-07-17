@@ -113,24 +113,30 @@
 	{
 		?>
 		<div id="tlogin">
+		
 			<table>
+				<!-- Username -->
 				<tr>
-					<td>
-						<form>
-							<label>username<label>
-							<input type="text" name="username" id="username"/>
-					</td>
-					<td>
-							<label>password<label>
-							<input type="password" name="password" id="password"/>
-					</td>
-					<td>
-					<!--<input type="submit" value="login" onClick="login()"/>-->
-							<a href="#" onClick="login()">Login</a>
-						</form>
-					</td>
+					<td> <label> Username <label> </td>
+				</tr>
+				<tr>
+					<td> <input type="text" name="username" id="username"/> </td>
+				</tr>
+			
+				<!-- Password -->
+				<tr>
+					<td> <label> Password <label> </td>
+				</tr>
+				<tr>
+					<td> <input type="password" name="password" id="password"/> </td>
+				</tr>
+			
+				<!-- Button 'send' -->
+				<tr rowspan="2">
+					<td> <a href="#" onClick="login()">Login</a> </td>
 				</tr>
 			</table>
+		
 		</div>
 		<a class="tlogino-tloginc" href="#">Login</a>
 		<?php
@@ -149,27 +155,38 @@
 	?>
 	
 		<div id="treg">
+		
 			<table>
+				<!-- Username -->
 				<tr>
-					<td>
-						<form>
-							<label>username<label>
-							<input type="text" name="username" id="usernameR"/>
-					</td>
-					<td>
-							<label>password<label>
-							<input type="password" name="password" id="passwordR"/>
-					</td>
-					<td>
-							<label>email<label>
-							<input type="text" name="email" id="emailR"/>
-					</td>
-					<td>
-							<a href="#" onClick="register()">Register</a>
-						</form>
-					</td>
+					<td> <label> Username <label> </td>
+				</tr>
+				<tr>
+					<td> <input type="text" name="username" id="usernameR"/> </td>
+				</tr>
+			
+				<!-- Password -->
+				<tr>
+					<td> <label> Password <label> </td>
+				</tr>
+				<tr>
+					<td> <input type="password" name="password" id="passwordR"/> </td>
+				</tr>
+				
+				<!-- E-Mail -->
+				<tr>
+					<td> <label> E-Mail <label> </td>
+				</tr>
+				<tr>
+					<td> <input type="text" name="email" id="emailR"/> </td>
+				</tr>
+			
+				<!-- Button 'send' -->
+				<tr rowspan="2">
+					<td> <a href="#" onClick="register()">Register</a> </td>
 				</tr>
 			</table>
+			
 		</div>
 		<!-- used for toggle-->
 		<a class="trego-tregc" href="#">Register</a>
