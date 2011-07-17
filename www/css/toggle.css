@@ -5,9 +5,9 @@ a.tlogino-tloginc
 {
 width: 250px;
 height: 25px;
-margin:0px;
-text-align:center;  
-background:#FF9933;  
+text-align:center;
+padding-top: 5px;
+background: blue;  
 font-size:14px;  
 font-weight:700;  
 text-transform:uppercase;  
@@ -18,7 +18,7 @@ text-decoration:none;
 
 a.tlogino-tloginc:hover 
 {  
-background:#FF0000;  
+background: dodgerblue;  
 }  
 
 /* Displays when toggle is open */
@@ -38,9 +38,9 @@ a.trego-tregc
 {
 width: 250px;
 height: 25px;
-margin:0px;
+padding-top: 5px;
 text-align:center;  
-background:#FF9933;  
+background: blue;  
 font-size:14px;  
 font-weight:700;  
 text-transform:uppercase;  
@@ -50,7 +50,7 @@ text-decoration:none;
 }  
 
 a.trego-tregc:hover {  
-background:#FF0000;  
+background: dodgerblue;  
 }  
 
 /* Displays when toggle is open */
