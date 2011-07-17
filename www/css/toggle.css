@@ -1,9 +1,11 @@
 
 /* Login */
+/* Toggle closed */
 a.tlogino-tloginc
 {
-margin:0px;  
-padding:15px;  
+width: 250px;
+height: 25px;
+margin:0px;
 text-align:center;  
 background:#FF9933;  
 font-size:14px;  
@@ -14,27 +16,29 @@ color:#fff;
 text-decoration:none;  
 }  
 
-a.tlogino-tloginc:hover {  
+a.tlogino-tloginc:hover 
+{  
 background:#FF0000;  
 }  
 
+/* Displays when toggle is open */
 #tlogin 
-{  
-width:460px;  
+{ 
+width: 250px;  
 margin:0px;  
 background: black;  
-padding:20px;  
 color: white;  
-line-height:23px;  
+line-height:23px;
 } 
 
 
 /* Registration */
-
+/* Toggle closed */
 a.trego-tregc
 {
-margin:0px;  
-padding:15px;  
+width: 250px;
+height: 25px;
+margin:0px;
 text-align:center;  
 background:#FF9933;  
 font-size:14px;  
@@ -49,12 +53,12 @@ a.trego-tregc:hover {
 background:#FF0000;  
 }  
 
+/* Displays when toggle is open */
 #treg
 {  
-width:460px;  
-margin:0px;  
+width: 250px;  
+margin:0px;
 background: black;  
-padding:20px;  
 color: white;  
 line-height:23px;  
 } 
