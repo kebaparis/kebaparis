@@ -112,6 +112,9 @@
 	function printLoginForm()
 	{
 		?>
+		
+		<a class="tlogino-tloginc" href="#">Login</a>
+		
 		<div id="tlogin">
 		
 			<table>
@@ -138,7 +141,7 @@
 			</table>
 		
 		</div>
-		<a class="tlogino-tloginc" href="#">Login</a>
+		
 		<?php
 	} // end printLoginForm()
 
@@ -154,6 +157,9 @@
 	{
 	?>
 	
+		<!-- used for toggle-->
+		<a class="trego-tregc" href="#">Register</a>
+		
 		<div id="treg">
 		
 			<table>
@@ -188,8 +194,7 @@
 			</table>
 			
 		</div>
-		<!-- used for toggle-->
-		<a class="trego-tregc" href="#">Register</a>
+
 	<?php
 	}
 
