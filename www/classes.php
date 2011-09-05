@@ -31,25 +31,25 @@ private $SALT_LENGTH;
 
 	//runs every time a new reference is created
 	public function __construct($newUsername = NULL) {
-		
+
 		$this->CookieLifeTime = 60*60*24*50; // 50 days
 		$this->minRegDelay = 20; // one day 60*60*24
 		$this->SALT_LENGTH = 32;
 
 		$this->usrIP = $_SERVER['REMOTE_ADDR'];
-		
+
 		//take value of attribute else take it from the session
 		if ($this->checkLogin()) { $this->usrName = $_SESSION['username']; }
 		else { $this->usrName = $newUsername; }
-		
+
 		echo "class constructed: " . $this->usrName . "</br>";
-		
+
 		$this->updateFromDB();
 		$this->printUser();
 	}
-	
+
 	public function printUser() {
-	
+
           echo $this->usrID;
           echo "<b> | </b>";
           echo $this->usrName;
@@ -83,7 +83,7 @@ private $SALT_LENGTH;
           echo "<b> | </b> </br>";
 
 
-		
+
 	}
 
 	public function updateFromDB() {
@@ -113,19 +113,19 @@ private $SALT_LENGTH;
 		//username allredy used
 		//email allredy used
 		$errorCode = 0;
-		
+
 
 		$result = mysql_query("
 			SELECT UNIX_TIMESTAMP(MAX(usrCreated)) FROM tUser WHERE tUser.usrIP = '" . $this->usrIP . "'
 		");
-		
+
 		$usrCreated = mysql_result($result, 0);
-		
+
 		if ( time() - $usrCreated < $this->minRegDelay ) {
 			$errorCode = 10; // to much registrations
 		}
-		
-		
+
+
 		$result = mysql_query("
 			SELECT COUNT(*) FROM tUser WHERE tUser.usrName = '" . $this->usrName . "'
 		");
@@ -137,30 +137,33 @@ private $SALT_LENGTH;
 			SELECT COUNT(*) FROM tUser WHERE tUser.usrEmail = '" . $this->usrEmail . "'
 		");
 		if (mysql_result($result, 0) > 0) {
-			
+
 			if ($errorCode == 11) { $errorCode = 13;} //username and emailaddress are allready used
 			else { $errorCode = 12;} // only the email adress is used
 		}
-		
+
+		if ($newPassword or $newEmail or $this->usrName == "") { //if username / mail or password blank then
+			$errorCode = 14;}
+
 		return $errorCode;
-	  
-	  
+
+
       //return exact faillure
    
    }
-	
+
 	//register user
 	public function register($newPassword, $newEmail) {
 	  //if faillure = registrationPossible()
 		//write new user in DB
 		//sendValidationEmail();
-	  //else put out faillure
-	 
+	  //else put out failure
+
 	 $this->usrPassword['plaintext'] = $newPassword;
 	 $this->usrEmail = $newEmail;
-	 
+
     	  $errorCode = $this->registrationPossible();
-	  
+
 	  if ($errorCode == 0) {
        //if (true == true) {
        	  
@@ -180,7 +183,7 @@ private $SALT_LENGTH;
 
 	 switch ($errorCode) {
         case 0:
-          echo "registred sucessfully";
+          echo "registered sucessfully";
           break;
         case 10:
           echo "to much registrations from your IP";
@@ -194,8 +197,11 @@ private $SALT_LENGTH;
         case 13:
           echo "email and username allready used";
           break;
+				case 14:
+					echo "Please fill out all three fields, evt na meh errorcode mache damit mir chönd sege was gnau leer gsi ish?, iwo na pw längi ahneschribe";
+					break;
       }
-	  
+
 	}
 
 	//check validation in DB
@@ -226,11 +232,11 @@ private $SALT_LENGTH;
           //or send again write in DB
           //return true if sent
       //else return false if not sent
-	
-	
-	
+
+
+
 	  $activationkey = md5(uniqid(rand() * rand(), true) . $this->usrName);
-	  
+
 	$bool = mysql_query("
 		UPDATE tUser SET tUser.usrActivationkey = '$activationkey', usrActivationkeysent = usrActivationkeysent+1 WHERE tUser.usrName = '$this->usrName'
 	");
@@ -245,12 +251,12 @@ http://kebaparis.ch/login.php?akey=$activationkey
 
 
 EOF;
-	  
+
 		sendEmail($this->usrName . " <" . $this->usrEmail . ">", "kebaparis.ch registration", $body);
       
 
 	}
-	
+
 	//generates the password hash and the salt
 	public function generateHash($plainText, $salt = null) {
 
@@ -278,7 +284,7 @@ EOF;
 			$this->usrName = $userrow['usrName'];
 			$this->usrEmail = $userrow['usrEmail'];
 			$this->usrType = $userrow['usrType'];
-			
+
 			$this->makeSessionUsable(); //login
 			return true;
 		}
@@ -291,10 +297,10 @@ EOF;
 	//check if registred
     public function checkUserDB() {
       //lookup in DB if user exists
-	  
+
 	  $sqlResult = mysql_query("SELECT COUNT(*) FROM tUser WHERE tUser = '$this->usrName'");
 	  $count = mysql_result($sqlResult, 0);
-	  
+
 	  if ($count == 1) {
 		return true;
 	  }
@@ -306,7 +312,7 @@ EOF;
 
 	//creates a usless standart session
 	public function createSession() {
-	
+
 		/*
 		$this->session_id = session_id();
 		
@@ -326,32 +332,32 @@ EOF;
 		//}
 		//echo "session_id: " . $this->session_id . "<br />";
 	}
-	
+
 	//makeSessionUsable > login
     private function makeSessionUsable() {
-			
+
 		echo "makeSessionUsable <- now logedin = true <br />";
 		$_SESSION['username'] = $this->usrName;
 		$_SESSION['logedin'] = "true";
 
-		
+
 		//0nly for testing
 		echo "Username: ";
 		echo $_SESSION['username'];
 		echo " Loggedin: ";
 		echo $_SESSION['logedin'] . "</br>";
-	  
+
     }
-	
+
 	public function login($password) {
-		
+
 		$this->createSession();
-		
+
 		$this->usrPassword['plaintext'] = $password;
-		
+
 		$rawResult = mysql_query("SELECT usrPassword, usrSalt FROM tUser WHERE tUser.usrName = '$this->usrName'");
 		$count = mysql_num_rows($rawResult);
-		
+
 		if ($count == 1) {
 			$result = mysql_fetch_array($rawResult);
 			$this->usrPassword['hash'] = $result['usrPassword'];
@@ -360,9 +366,9 @@ EOF;
 		else {
 			$error = false;
 		}
-		
+
 		$sentHash = md5($this->usrPassword['salt'] . $this->usrPassword['plaintext']);
-		
+
 		if ($sentHash == $this->usrPassword['hash']) {
 			echo "correct username und password!! <br />";
 			$this->printUser();
@@ -374,10 +380,10 @@ EOF;
 			echo "failed to log in <br />";
 			$error = false;
 		}
-		
+
 		return $error;
 	}
-	
+
     
 	//check validation in Session
     public function checkValidationSession() 
@@ -421,13 +427,13 @@ EOF;
 		else {
         return false; //return false
       }
-		
+
     }
 
 	//set user inactive
     public function removeUser() {
 		//
-		
+
 		$bool = $this->checkActivationDB();
 
 		if ($bool) {
@@ -441,7 +447,7 @@ EOF;
 		}
         
     }
-	
+
 	// check if the param password is the same as the current user password (marcel)
 	public function checkPassword($password)
 	{
@@ -450,21 +456,21 @@ EOF;
 		{
 			return false;
 		}
-		
+
 		$this->updateFromDB();
-		
+
 		$md5pw = md5($password);
-		
+
 		//echo $this->usrPassword['hash'];
 		//echo "MD5 PW: $md5pw";
-		
+
 		if($this->usrPassword['hash'] == $md5pw)
 		{
 			//echo $this->usrPassword['hash'];
 			return true;
 		}
 	}
-	
+
 	//changes the user password to the param password (marcel)
 	public function changePassword($newPassword)
 	{
@@ -472,13 +478,13 @@ EOF;
 		{
 			return false;
 		}
-		
+
 		$this->updateFromDB();
-		
+
 		$pw = $this->generateHash($newPassword, $this->usrPassword['salt']);
-		
+
 		$updatepw = "UPDATE tUser SET tUser.usrPassword = '$pw' where tUser.usrID = " . $this->usrID;
-		
+
 		if(mysql_query($updatepw) == true)
 		{
 			//echo "password changed.";
@@ -500,23 +506,17 @@ EOF;
    
 
 
-} //end class user
+} //end class user!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 class Database {
-
-	private $db_handler;
-	private $db_server;
-	private $db_user;
-	private $db_password;
-	private $db_name;
 
 
 
 	public function __construct() {
 		include 'db_config.php';
 	}
-	
-	
+
+
 	public function connect() {
 
 		if (!isset($this->db_handler)) {
@@ -524,24 +524,24 @@ class Database {
 			mysql_select_db($this->db_name, $this->db_handler) or die ("select of db failed!");
 			//echo "db conected: " . $this->db_server . "</br>";
 		}
-	
+
 	}
-	
-	
+
+
 	public function quit() {
-	
+
 		if (isset($this->db_handler)) {
 			mysql_close($this->db_handler);
 			$this->db_handler = NULL;
 			//echo "db disconnected: " . $this->db_server;
 		}
-	
+
 	}
 
-	
+
 	public function __destruct() {
 	$this->quit();
-	
+
 	}
 
 
@@ -558,7 +558,7 @@ function sendEmail($recipient, $subject, $body) {
 	else {
 		//database query for email
 	}
-	
+
 	require_once "Mail.php";
 
 	include 'mail_config.php';
@@ -583,8 +583,8 @@ function sendEmail($recipient, $subject, $body) {
 	);
 
 	$mail = $smtp->send($to, $headers, $body);
-	
-	/*
+
+	/*en
 	if (PEAR::isError($mail)) {
 		echo("<p>" . $mail->getMessage() . "</p>");
 	}
@@ -594,4 +594,27 @@ function sendEmail($recipient, $subject, $body) {
 }
 
 
+
+/* End Class Database ***********************************************************************************/
+
+/* Arvet 
+class Spots {
+
+	//New Kebap-Spot create 
+	public function NewSpot {
+		
+		//Variables from KebapSpot on Page (X / Y cordinates, KebapSpot....)
+		$this->bla = $bla;
+		//Land Kanton Ort etc. muss über irgend eine Seite mithilfe von X und Y kordinaten geholt werden. und hier neu variable setzen
+
+
+		//Create Spot		
+		  mysql_query("INSERT INTO spot (FK_creator, cdate,Land, Kanton,Ort, X,Y) VALUES ('" . $this->usrName . "', '" .$this->usrPassword['hash'] . "', '" . $this->usrPassword['salt'] . "', '" . $this->usrEmail . "', '" . $this->usrIP . "')");
+		
+	}
+}
+/* end Arvet */re
+
 ?>
+
+
