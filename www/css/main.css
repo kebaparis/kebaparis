@@ -34,26 +34,19 @@ a:hover {
 
 /*** layout ***/
 
-		#stand {
+		.widget {
 			position: relative;
 			background-color: grey;
 			margin-top: 10%;
-			width:650px;
-			height:300px;
+			width: 750px;
 			/* 62golden rule */
 			right: 0%;
-			left: 20%;
+			left: 15%;
+			background: #f3f1eb;
+			/* border: 1px solid #dedbd1; */
+			margin-bottom: 15px;
+			color: black;
 		}
-		
-		#stand table{
-			height: 100%;
-			width: 100%;
-		} 
-		
-		#stand table tr td {
-			border:1px solid black;
-			vertical-align:middle;
-		} 
 		
 		#map {
 			vertical-align:middle;
@@ -73,6 +66,53 @@ a:hover {
 		background-color: blue;
 		}
 
+/* Stand Tab start */
+
+/* TABS  start */
+
+	.tabnav li {
+	display: inline;
+	list-style: none;
+	padding-right: 5px;
+	}
+	
+		.tabnav li a {
+		text-decoration: none;
+		text-transform: uppercase;
+		color: #222;
+		font-weight: bold;
+		padding: 4px 6px;
+		outline: none;
+		}
+		
+.tabnav li a:active, .tabnav li a:hover, .tabnav li.ui-tabs-selected a {
+		background: dodgerblue;
+		color: #222;
+		text-decoration: none;
+		}
+
+
+	.tabdiv {
+	margin-top: 5px;
+	background: #fff;
+	border: 2px solid #dedbd1;
+	padding: 5px;
+	}
+	
+
+/* Important! for hiding the other sites */
+.ui-tabs-hide {
+		display: none;
+		}
+
+
+	/* Tab sites start */
+
+
+	/* Tab sites stop */
+
+/* TABS end */
+
 
 
 /* User Control */
@@ -91,10 +131,6 @@ a:hover {
 	border-radius: 0px 0px 20px 20px;
 }
 
-
-
-
-
 /*
 #drminfo {
 	position: relative;
@@ -109,8 +145,8 @@ a:hover {
 #login {
 	background-color:green;
 	position:absolute;
-	top:2px;
-	right:4px;
+	top: 2px;
+	right: 4px;
 	padding-top: 8px;
 	padding-bottom: 4px;
 	padding-left: 2%;
@@ -175,4 +211,6 @@ a:hover {
 	-webkit-border-radius: 0px 0px 15px 15px;
 	border-radius: 0px 0px 15px 15px;
 	}
+
+
 
