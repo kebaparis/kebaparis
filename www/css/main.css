@@ -34,11 +34,11 @@ a:hover {
 
 /*** layout ***/
 
-		.widget {
+		#main {
 			position: relative;
 			background-color: grey;
 			margin-top: 10%;
-			width: 750px;
+			width: 800px;
 			/* 62golden rule */
 			right: 0%;
 			left: 15%;
@@ -66,52 +66,68 @@ a:hover {
 		background-color: blue;
 		}
 
-/* Stand Tab start */
 
 /* TABS  start */
 
-	.tabnav li {
-	display: inline;
-	list-style: none;
-	padding-right: 5px;
-	}
-	
-		.tabnav li a {
-		text-decoration: none;
-		text-transform: uppercase;
-		color: #222;
-		font-weight: bold;
-		padding: 4px 6px;
-		outline: none;
-		}
-		
-.tabnav li a:active, .tabnav li a:hover, .tabnav li.ui-tabs-selected a {
-		background: dodgerblue;
-		color: #222;
-		text-decoration: none;
-		}
+/* Menu Tab */  
+#container{  
+    margin: 7em auto;  
+    width: 400px;  
+}  
+#container ul{  
+    list-style: none;  
+    list-style-position: outside;  
+}  
+#container ul.menu li{  
+    float: left;  
+    margin-right: 5px;  
+    margin-bottom: -1px;  
+}  
+#container ul.menu li{  
+    font-weight: 700;  
+    display: block;  
+    padding: 5px 10px 5px 10px;  
+    background: #efefef;  
+    margin-bottom: -1px;  
+    border: 1px solid #d0ccc9;  
+    border-width: 1px 1px 1px 1px;  
+    position: relative;  
+    color: #898989;  
+    cursor: pointer;  
+}  
+#container ul.menu li.active{  
+    background: #fff;  
+    top: 1px;  
+    border-bottom: 0;  
+    color: #5f95ef;  
+} 
 
+.clear{  
+    clear: both;  
+    height: 0;  
+    visibility: hidden;  
+    display: block;  
+}  
+a{  
+    text-decoration: none;  
+}  
 
-	.tabdiv {
-	margin-top: 5px;
-	background: #fff;
-	border: 2px solid #dedbd1;
-	padding: 5px;
-	}
-	
+/* /menu */  
 
-/* Important! for hiding the other sites */
-.ui-tabs-hide {
-		display: none;
-		}
+/* Content */  
+.content{  
+    margin: 0pt auto;  
+    background: #efefef;  
+    background: #fff;  
+    border: 1px solid #d0ccc9;  
+    text-align: left;  
+    padding: 10px;  
+    padding-bottom: 20px;  
+    font-size: 11px;  
+} 
+/* /Content */
 
-
-	/* Tab sites start */
-
-
-	/* Tab sites stop */
-
-/* TABS end */
+/***** TABS end ******/
 
 
 
