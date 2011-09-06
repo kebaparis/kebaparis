@@ -80,7 +80,7 @@
 				<td> <a href="http://twitter.com/#!/kebaparisch" target="_blank"> Twitta </a> </td>
 			</tr>
 			<tr>
-				<td> <a href="info@kebaparis.ch" target="_blank"> Mailah </a> </td>
+				<td> <a href="mailto:info@kebaparis.ch"> Mailah </a> </td>
 			</tr>
 		</table>
 	</div>
