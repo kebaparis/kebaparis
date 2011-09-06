@@ -33,36 +33,17 @@
         <div id="tabvanilla" class="widget">
 
             <ul class="tabnav">
-                <li><a href="#browse">Browse</a></li>
-                <li><a href="#new">New</a></li>
+                <li><a href="#browse">New</a></li>
+                <li><a href="#new">Browse</a></li>
                 <li><a href="#ranking">Ranking</a></li>
+								<li><a href="#usercntrl">User Control</a></li>
 								<li><a href="#moderator">Moderator</a></li>
 								<li><a href="#kebapowner">Kebapowner</a></li>            
 						</ul>
 
             <div id="browse" class="tabdiv">
-										<p> browse </p>
-
-		<table>
-
-			<tr>
-				<td rowspan="3"><div id="map">map</div></td>
-				<td colspan="3" id="ort"><h1>Seeperle<h1></td>
-			</tr>
-
-			<tr>
-				<td id="ort" colspan="3">Stäfa</td>
-			</tr>
-
-			<tr id="buttons">
-				<td> <a href"#"> <a href=""> rate </a> </td>
-				<td> <a href"#"> <a href=""> Edit </a> </td>
-				<td> <a href"#"> <a href=""> New  </a> </td>
-			</tr>
-
-		</table>
-
-
+                 <p> bla </p>
+								 <?php include 'browse.php'; ?>
             </div><!--/browse-->
             
             <div id="new" class="tabdiv">
@@ -71,6 +52,11 @@
             
             <div id="ranking" class="tabdiv">
                    <p> ranking </p>
+            </div><!--ranking-->
+
+            <div id="usercntrl" class="tabdiv">
+                 <p> bla </p>
+								 <?php include 'usrcntrl.php'; ?>
             </div><!--ranking-->
 
             <div id="moderator" class="tabdiv">
