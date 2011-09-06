@@ -22,7 +22,7 @@
 	<!-- Arvet Tab / Slider thing -->
 	<script type="text/javascript" src="js/jquery-1.2.6.min.js"></script>  
 	<script type="text/javascript" src="js/jquery-ui-personalized-1.5.2.packed.js"></script>  
-	<script type="text/javascript" src="js/sprinkle.js"></script>  
+	<script type="text/javascript" src="js/tabs.js"></script>  
 
 	<!-- All toggles in this file, Arvet -->
 	<script type="text/javascript" src="js/jquery.toggle.js"></script>
