@@ -42,7 +42,6 @@
 						</ul>
 
             <div id="browse" class="tabdiv">
-                 <p> bla </p>
 								 <?php include 'browse.php'; ?>
             </div><!--/browse-->
             
@@ -55,8 +54,8 @@
             </div><!--ranking-->
 
             <div id="usercntrl" class="tabdiv">
-                 <p> bla </p>
-								 <?php include 'usrcntrl.php'; ?>
+                   <p> user control </p>
+                 <!-- < ? php include 'usrcntrl.php'; ? > -->
             </div><!--ranking-->
 
             <div id="moderator" class="tabdiv">
@@ -74,13 +73,14 @@
 	<div id="promo">
 		<table>
 			<tr>
-				<td> <a href=""> Facebonk </a> </td>
+				<!-- https://www.facebook.com/brandpermissions/logos.php -->
+				<td> <a href="https://www.facebook.com/pages/kebaparisch/157140087677024" target="_blank"> Facebonk </a> </td>
 			</tr>
 			<tr>
-				<td> <a href=""> Twitta </a> </td>
+				<td> <a href="http://twitter.com/#!/kebaparisch" target="_blank"> Twitta </a> </td>
 			</tr>
 			<tr>
-				<td> <a href=""> Mailah </a> </td>
+				<td> <a href="info@kebaparis.ch" target="_blank"> Mailah </a> </td>
 			</tr>
 		</table>
 	</div>
