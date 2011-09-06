@@ -36,13 +36,11 @@ a:hover {
 
 		#main {
 			position: relative;
-			background-color: grey;
 			margin-top: 10%;
 			width: 800px;
 			/* 62golden rule */
 			right: 0%;
 			left: 15%;
-			background: #f3f1eb;
 			/* border: 1px solid #dedbd1; */
 			margin-bottom: 15px;
 			color: black;
@@ -69,10 +67,17 @@ a:hover {
 
 /* TABS  start */
 
+.clear{  
+    clear: both;  
+    height: 0;  
+    visibility: hidden;  
+    display: block;  
+}
+
 /* Menu Tab */  
 #container{  
-    margin: 7em auto;  
-    width: 400px;  
+    margin: 7em auto;
+    width: 700px;  
 }  
 #container ul{  
     list-style: none;  
@@ -94,58 +99,57 @@ a:hover {
     position: relative;  
     color: #898989;  
     cursor: pointer;  
-}  
-#container ul.menu li.active{  
+}
+
+#container ul.menu li.active{
+		padding: 6px 10px px 10px;  
     background: #fff;  
     top: 1px;  
-    border-bottom: 0;  
-    color: #5f95ef;  
-} 
-
-.clear{  
-    clear: both;  
-    height: 0;  
-    visibility: hidden;  
-    display: block;  
-}  
-a{  
-    text-decoration: none;  
-}  
+    border-bottom: -1; 
+		border-bottom-width: 0px;
+    color: dodgerblue;  
+}
 
 /* /menu */  
 
 /* Content */  
+
 .content{  
     margin: 0pt auto;  
     background: #efefef;  
-    background: #fff;  
-    border: 1px solid #d0ccc9;  
+    background: #fff;
+    border-right: 1px solid #d0ccc9;
+    border-left: 1px solid #d0ccc9;  
+    border-bottom: 1px solid #d0ccc9;  
     text-align: left;  
     padding: 10px;  
     padding-bottom: 20px;  
     font-size: 11px;  
 } 
+
 /* /Content */
 
-/***** TABS end ******/
-
-
-
-/* User Control */
-#usrcntrl {
-	background-color: purple;
-	position: relative;
-	padding-top: 8px;
-	padding-bottom: 8px;
-	padding-left: 2%;
-	padding-right: 2%;
-	width: 18%;
-	
-	/* curved */
-	-moz-border-radius: 0px 0px 20px 20px;
-	-webkit-border-radius: 0px 0px 20px 20px;
-	border-radius: 0px 0px 20px 20px;
+/* Tab Content */
+.content.new{  
+    display: block;  
 }
+.content.browse{  
+    display: none;  
+}
+.content.ranking{  
+    display: none;  
+}
+.content.moderator{  
+    display: none;  
+}
+.content.usrcntrl{  
+    display: none;  
+}  
+.content.kebapowner{  
+    display: none;  
+} 
+
+/***** TABS end ******/
 
 /*
 #drminfo {
