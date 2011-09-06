@@ -16,57 +16,60 @@
     </div> <!-- end div #login -->
     
     <div id="search">
-    <table>
-    	<tr> 
-    		<td> Search: </td>
-    		<td> <input type="text" name="q" onkeyup="letstype(this.value, '""')" size="20" /> </td>
-    		<td> <a href=""> Go </a> </td>
-    	</tr>
-	</table>
+    	<table>
+					<tr> 
+						<td> Search: </td>
+						<td> <input type="text" name="q" onkeyup="letstype(this.value, '""')" size="20" /> </td>
+						<td> <a href=""> Go </a> </td>
+					</tr>
+			</table>
 
 
-    </div>
-<!-- end div #search --> 
+    </div> <!-- end div #search --> 
 
 
 <!-- Arvet test 1 -->
-        <div id="tabvanilla" class="widget">
+<div id="main">
 
-            <ul class="tabnav">
-                <li><a href="#browse">New</a></li>
-                <li><a href="#new">Browse</a></li>
-                <li><a href="#ranking">Ranking</a></li>
-								<li><a href="#usercntrl">User Control</a></li>
-								<li><a href="#moderator">Moderator</a></li>
-								<li><a href="#kebapowner">Kebapowner</a></li>            
-						</ul>
+	<div id="container">
 
-            <div id="browse" class="tabdiv">
-								 <?php include 'browse.php'; ?>
-            </div><!--/browse-->
-            
-            <div id="new" class="tabdiv">
-                <p> new </p>
-            </div><!--/new-->
-            
-            <div id="ranking" class="tabdiv">
-                   <p> ranking </p>
-            </div><!--ranking-->
+		      <ul class="menu">  
+		          <li id="new" class="active"> New </li>  
+		          <li id="browse"> Browse </li>  
+		          <li id="ranking"> Ranking </li>
+							<li id="moderator"> Moderator </li>
+							<li id="usrcntrl"> Control </li>
+							<li id="kebapowner"> Kebapowner </li> 
+		      </ul>
+	 
+		      <span class="clear"></span>  
 
-            <div id="usercntrl" class="tabdiv">
-                   <p> user control </p>
-                 <!-- < ? php include 'usrcntrl.php'; ? > -->
-            </div><!--ranking-->
+		      <div class="content new"> 
+							<?php include 'tabs/new.php'; ?>
+					</div>
 
-            <div id="moderator" class="tabdiv">
-                   <p> moderator </p>
-            </div><!--moderator-->
+					<div class="content browse">  
+		         	<?php include 'tabs/browse.php'; ?>
+		      </div>
 
-            <div id="kebapowner" class="tabdiv">
-                   <p> kebapowner </p>
-            </div><!--kebapowner-->
+		      <div class="content ranking"> 
+	 						<?php include 'tabs/ranking.php'; ?>
+					</div>
 
-        </div><!--/widget-->
+		      <div class="content moderator"> 
+	 						<?php include 'tabs/moderator.php'; ?>
+					</div>
+
+		      <div class="content usrcntrl"> 
+	 						<?php include 'tabs/usrcntrl.php'; ?>
+					</div>
+
+		      <div class="content kebapowner"> 
+	 						<?php include 'tabs/kebapowner.php'; ?>
+					</div>
+	</div>  <!-- container -->
+</div> <!-- /main -->
+
 
 <!-- Arvet end test 1 -->
 
