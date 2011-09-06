@@ -613,7 +613,7 @@ class Spots {
 		
 	}
 }
-/* end Arvet */re
+/* end Arvet */
 
 ?>
 
