@@ -65,9 +65,53 @@ function register()
 	
 	var username = document.getElementById('usernameR').value;
 	var password = document.getElementById('passwordR').value;
+	var passwordS = document.getElementById('passwordS').value;
 	var email = document.getElementById('emailR').value;
 	
-	
+
+	// Field empty check ^Ar
+	if(username == "" || password == "" || passwordS == "" || email == "")
+	{
+		document.getElementById('statusHolder').innerHTML = "Please fill in all information!";
+		document.write("<b>Hure fuell alles us</b>");
+		setFieldsEmpty();
+		return;
+	}
+	// Password aren't the same
+	if(password != passwordS)
+	{
+		document.getElementById('statusHolder').innerHTML = "new passwords are'nt the same!";
+				document.write("<b>Passwoerter stimmed ned :( , fuck you</b>");
+		setFieldsEmpty();
+		return;
+	}
+
+/* Schisss hurreee ^Ar 
+	// E-Mail checken
+    // Check Mail Syntax (bla@bla.bla)
+			if(!preg_match("/^[^@].+\.\D{2,5}$/",$email)) {
+					document.getElementById('statusHolder').innerHTML = "HUUUUREEEE!";
+					setFieldsEmpty();
+					return;
+				//Splitta
+				$split = explode('@', $email);
+				$domain = $split[(count($split) -1)];
+				//Get IP from $domain and check
+				if(gethostbyname($domain) != $domain) {
+					$notvalid = 'trashmail.net,trash-mail.com';
+					$split = explode(',',$notvalid);
+					//check
+						if(!in_array(strtolower($domain), $split)) {
+						//Mail is Ok
+						}else {
+									setFieldsEmpty();
+									return;
+						};		
+					}; //close domain check
+			}; //close mail check
+*/
+
+
 	xmlhttp.onreadystatechange=function()
 	{
 		//alert("data get");
