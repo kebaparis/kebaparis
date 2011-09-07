@@ -171,14 +171,22 @@
 					<td> <input type="text" name="username" id="usernameR"/> </td>
 				</tr>
 			
-				<!-- Password -->
+				<!-- First Password field -->
 				<tr>
 					<td> <label> Password <label> </td>
 				</tr>
 				<tr>
 					<td> <input type="password" name="password" id="passwordR"/> </td>
 				</tr>
-				
+
+				<!-- Second Password field -->
+				<tr>
+					<td> <label> Password <label> </td>
+				</tr>
+				<tr>
+					<td> <input type="password" name="password_again" id="passwordS"/> </td>
+				</tr>
+
 				<!-- E-Mail -->
 				<tr>
 					<td> <label> E-Mail <label> </td>
