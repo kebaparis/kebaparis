@@ -5,7 +5,7 @@
   <?php include 'header.php'; ?>
   
   
-  <body>
+  <body onload="JavaScript:mygmap.initialize();"> <!-- map magic   MUSS NOCH WOANDERS HIN!!! -->
   
     <div id="login">
     

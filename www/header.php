@@ -30,7 +30,10 @@
 	<!-- Used for Login & Registration -->
 	<script type="text/javascript" src="js/ajax.js" ></script>
 	
-
+	<!-- Used for map ^koma5 -->
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="js/gmap.js"></script>
+	<!-- <script type="text/javascript">var mygmap = new gmap('map_canvas', <?=$lat?>, <?=$long?>);</script> -->
 
 	<!-- Keller? -->
 	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
