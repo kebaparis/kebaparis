@@ -3,8 +3,9 @@
 /* Toggle closed */
 a.tlogino-tloginc
 {
-margin-top: 5%;
-left: 20%;
+position: absolute;
+top: 90px;
+right: 65px;
 width: 250px;
 height: 25px;
 text-align: center;
@@ -25,13 +26,16 @@ background: dodgerblue;
 
 /* Displays when toggle is open */
 #tlogin 
-{ 
+{
+position: absolute;
+top: 130px;
+right: 65px;
 width: 250px;
-height: 150px;
+height: 250px;
 margin:0px;
 background: grey;  
 color: white;  
-line-height: 30px;
+line-height: 20px;
 } 
 
 
@@ -39,7 +43,9 @@ line-height: 30px;
 /* Toggle closed */
 a.trego-tregc
 {
-margin-top: 10px;
+position: absolute;
+right: 325px;
+top: 90px;
 width: 250px;
 height: 25px;
 padding-top: 5px;
@@ -59,11 +65,14 @@ background: dodgerblue;
 
 /* Displays when toggle is open */
 #treg
-{  
+{
+position: absolute;
+top: 130px;
+right: 325px;
 width: 250px; 
-height: 230px;
+height: 250px;
 margin: 0px;
 background: grey;  
 color: white;  
-line-height: 30px;  
+line-height: 20px;  
 } 

@@ -12,7 +12,7 @@ CREATE TABLE tUser
   `usrPassword` VARCHAR(32) NOT NULL,
   `usrSalt` VARCHAR(32) NOT NULL,
   `usrEmail` VARCHAR(30) NOT NULL UNIQUE,
-  `usrType` VARCHAR(10) NOT NULL DEFAULT 'user',
+  `usrType` VARCHAR(10) NOT NULL DEFAULT 'user',  # We have: user,admin,moderator
   `usrActivationkey` VARCHAR(32) UNIQUE,
   `usrActivationkeysent` TINYINT NOT NULL,
   `usrActiv` BOOLEAN NOT NULL DEFAULT FALSE,
@@ -26,33 +26,40 @@ CREATE TABLE tUser
 
 
 
-#New Shiitt***************************************************************************
+#New Stuff
 
 #Table for Kebabspot Information
 
-drop table if exists spotinfo;
-create table spot
+drop table if exists tSpots;
+create table tSpots
 (
-	ID_spot integer unsigned not null auto_increment,
-	FK_creator int,
-	#FOREIGN KEY (FK_creator) REFERENCES tUser(usrID),
-	FK_Kebapowner int,
-	#FOREIGN KEY (FK_Kebapowner) REFERENCES tUser(usrID),
-	cdate	timestamp, #create date
-	Picture varchar(255),
-	Price Float,
-	Menu Float,
-	Land varchar(255),
+	spotID integer unsigned not null auto_increment,
+	spotCreatorID int, 													#verweist auf tUser.usrID
+	spotKebapownerID int,												#Verweist auf tUser.usrID
+	spotDate timestamp, 												#Spot create Date now()
+	spotPlaceID int,													#FK to tPlace.placeID
+	
+#spotPicture varchar(255),											#Picutre path
+#spotPrice Float,													#Price 
+#Menu Float,
+#Opentimes varchar(255),
+	Rank int,
+	Primary Key (ID_spot)
+) ENGINE=INNODB;
+
+
+#Table for Place linked with tSpots;
+drop table if exists tPlace;
+create table tPlace
+(
+	placeID integer unsigned not null auto_increment,					#Primary ID
+	spotCountry varchar(255),											#Country 
 	Kanton varchar(255),
 	Ort	varchar(255),
 	PLZ varchar(255),
 	X float,
 	Y float,
-	Opentimes varchar(255),
-	Rank int,
-	Primary Key (ID_spot)
-) ENGINE=INNODB;
-
+)
 
 #Alle Bewertungen bewerten von 0 - 5 punkte / 1 punkt ist für uns 0.2 zum rechnen.
 DROP TABLE IF EXISTS rating;

@@ -1,5 +1,4 @@
 <table>
-
 			<tr>
 				<td rowspan="3"><div id="map">map</div></td>
 				<td colspan="3" id="ort"><h1>Seeperle<h1></td>
@@ -14,5 +13,4 @@
 				<td> <a href"#"> <a href=""> Edit </a> </td>
 				<td> <a href"#"> <a href=""> New  </a> </td>
 			</tr>
-
 </table>

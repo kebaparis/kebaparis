@@ -19,7 +19,17 @@ function login()
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
 	
-	//alert(username);
+	// Field empty check ^Ar
+	if(username == "" || password == "")
+	{
+		//document.getElementById('statusHolder').innerHTML = "[Test] username or/and password is empty";
+		setFieldsEmpty();
+		alert("[Test] Username or/and Password empty, please bring this back to HTML site! I have no Idea how, setFieldsEmpty also not work. ^Klar")
+		return;
+	}
+	alert("Nothing is empty, login...");
+	
+	
 	xmlhttp.onreadystatechange=function()
 	{
 		//alert("data get");
@@ -29,12 +39,15 @@ function login()
 			//alert(xmlhttp.responseText);
 		}
 	}
+	
+
 	var page = "usr.php?rtype=lin&username=" + username + "&password=" + password;
 	
 	//alert(page);
 	xmlhttp.open("GET",page,true);
 	xmlhttp.send();
 }
+
 
 
 //Logout
@@ -65,7 +78,41 @@ function register()
 	
 	var username = document.getElementById('usernameR').value;
 	var password = document.getElementById('passwordR').value;
-	var email = document.getElementById('emailR').value;
+	var passwordS = document.getElementById('passwordS').value;
+	var email = document.getElementById('email').value;
+		
+
+	// Field empty check ^Ar
+	//Username empty
+	//Passwords empty
+	//Email empty
+	if(username == "" || password == "" || passwordS == "" || email == "")
+	{
+		document.getElementById('statusHolder').innerHTML = "Please fill in all information!";
+		alert("[Test] Username / Passwords / Email is empty, bring back to design dunno how, set fields empty also not working")
+		setFieldsEmpty();
+		return;
+	}
+	alert("Nothing is empty, next...");
+	
+	// Password doesn't match
+	if(password != passwordS)
+	{
+		document.getElementById('statusHolder').innerHTML = "new passwords are'nt the same!";
+		alert("[Test] Everything is filled out, but passwords doesn't match, and SetEmptyFields not working!")
+		setFieldsEmpty();
+		return;
+	}
+	alert("Passwords match, next...");
+	
+	/*Regex Filter */
+	filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+	if (!filter.test(email)) {
+	  	alert("[Test] E-Mail format is wrong, bring back error")
+		return false;
+	}
+	alert("Mail is fine, next...");
 	
 	
 	xmlhttp.onreadystatechange=function()

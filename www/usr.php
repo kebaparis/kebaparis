@@ -35,20 +35,28 @@
 		$User['password'] = $_REQUEST['password'];
 
 		$myuser = new user($User['username']);
+		/* Arvet old
+		if($myuser->login($User['password']) == true )
+		{
+			printLoggedInForm($myuser->usrName);
+		}
+		*///Arvet new
 
-		if($myuser->login($User['password']) == true)
+			
+		if ($myuser->login($User['password']) == true) 
 		{
 			printLoggedInForm($myuser->usrName);
 		}
 		else
 		{
 			//show login form if login failed
-			echo "not logged in";
+			echo "[test] Logindaten waren falsch";
 			printLoginForm();
 			printRegistrationForm();
 		}
 
 	} // end lin()
+
 
 	function lou() 
 	{
@@ -192,7 +200,7 @@
 					<td> <label> E-Mail <label> </td>
 				</tr>
 				<tr>
-					<td> <input type="text" name="email" id="emailR"/> </td>
+					<td> <input type="text" name="email" id="email"/> </td>
 				</tr>
 			
 				<!-- Button 'send' -->

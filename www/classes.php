@@ -142,9 +142,7 @@ private $SALT_LENGTH;
 			else { $errorCode = 12;} // only the email adress is used
 		}
 
-		if ($newPassword or $newEmail or $this->usrName == "") { //if username / mail or password blank then
-			$errorCode = 14;}
-
+		
 		return $errorCode;
 
 
@@ -197,9 +195,9 @@ private $SALT_LENGTH;
         case 13:
           echo "email and username allready used";
           break;
-				case 14:
+		/* can be deleted? ^Ar case 14:
 					echo "Please fill out all three fields, evt na meh errorcode mache damit mir chönd sege was gnau leer gsi ish?, iwo na pw längi ahneschribe";
-					break;
+					break; */
       }
 
 	}
@@ -374,6 +372,8 @@ EOF;
 			$this->printUser();
 			$this->makeSessionUsable();
 			$this->printUser();
+			
+			
 			$error = true;
 		}
 		else {
@@ -594,7 +594,6 @@ function sendEmail($recipient, $subject, $body) {
 }
 
 
-
 /* End Class Database ***********************************************************************************/
 
 /* Arvet 
@@ -607,7 +606,7 @@ class Spots {
 		$this->bla = $bla;
 		//Land Kanton Ort etc. muss über irgend eine Seite mithilfe von X und Y kordinaten geholt werden. und hier neu variable setzen
 
-
+		
 		//Create Spot		
 		  mysql_query("INSERT INTO spot (FK_creator, cdate,Land, Kanton,Ort, X,Y) VALUES ('" . $this->usrName . "', '" .$this->usrPassword['hash'] . "', '" . $this->usrPassword['salt'] . "', '" . $this->usrEmail . "', '" . $this->usrIP . "')");
 		

@@ -1,7 +1,5 @@
-USE fifthch_kebap;
 
-
-/* Abfrage stimmt mit DB nicht mehr überein, z.B usrActivated */
+/*
 INSERT INTO tUser (usrName, usrPassword, usrEmail, usrActivated, usrType)
 VALUES
 	('marco', MD5('1234'), 'marco@kebaparis.ch', TRUE, 'admin'),
@@ -13,3 +11,9 @@ VALUES
 	('peter', MD5('1234'), 'marcocuoco@googlemail.com', TRUE, 'user'),
 	('sepp', MD5('1234'), 'marcocuoco@gmail.com', FALSE, 'user'),
 	('ueli', MD5('1234'), 'marcocuoco@bluewin.ch.ch', FALSE, 'user');
+	
+*/	
+
+USE fifthch_kebap;
+	
+INSERT INTO tUser (usrName, usrPassword, usrEmail, usrActiv, usrType) VALUES ('moderator', MD5('1234'), 'moderator@kebaparis.ch', TRUE, 'moderator'), ('admin', MD5('1234'), 'admin@kebaparis.ch', TRUE, 'admin'), ('user', MD5('1234'), 'user@kebaparis.ch', TRUE, 'user')

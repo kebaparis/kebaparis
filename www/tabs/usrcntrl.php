@@ -21,9 +21,55 @@
 
 	$myDB = new Database();
 	//$myDB-> connect();
+	
 	?>
 	
-	<div class="coda-slider preload" id="settings-slider">
+<p align="center"> Control Center </p>
+
+
+	
+<table>
+	<tr>
+		<td> Username: </td>
+		<td> 
+	</tr>
+	<tr>
+		
+	</tr>
+	<tr>
+		
+	</tr>
+	<tr>
+		
+	</tr>
+</table>
+						
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- <div class="coda-slider preload" id="settings-slider">
 		<div class="panel">
 			<div class="panel-wrapper">
 				<h2 class="title">Change password</h2>
@@ -45,6 +91,7 @@
 								<td>Commit new password</td>
 								<td><input type="password" name="newPasswortCommitted" id="newPassword1" /></td>
 							</tr>
+
 							<tr>
 								<td></td>
 								<td><a href="#" onClick="changePassword()">Change</a></td>
@@ -60,7 +107,30 @@
 				<p></p>
 			</div>
 		</div>
+		<div class="panel">
+			<div class="panel-wrapper">
+				<h2 class="title">Userinfo</h2>
+				<!-- SQL querry stuff ^Ar 
+				
+				
+					echo "<table>";
+					echo "<tr>";
+						/* echo "<td>".$[''] . "</td>";
+						Echo "<td>". $[''] . "</td>";
+						echo "<td>". $[''] . "</td>";
+						echo "<td>". $[''] . "</td>";
+						echo "<td>". $[''] . "</td>";
+						echo "<td>". $[''] . "</td>";
+						echo "<td>". $[''] . "</td>"; */
+					echo "</tr>";
+					echo "</table>";
+				
+				
+			</div>
+		</div>
 	</div><!-- .coda-slider -->
-	
-	<?php
-?>le
+
+<?php 
+
+	?>
+

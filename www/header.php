@@ -6,7 +6,9 @@
   
   
     <link rel="stylesheet" type="text/css" href="css/main.css">
-		<link rel="stylesheet" href="css/coda-slider-2.0.css" type="text/css" media="screen" />
+	
+	<!-- Coda Slider CSS -->
+	<link rel="stylesheet" href="css/coda-slider-2.0.css" type="text/css" media="screen" />
 	
 	<!-- Arvet toggle slider registration & login -->
 	<link rel="stylesheet" href="css/toggle.css" type="text/css"/>
@@ -30,17 +32,24 @@
 	<!-- Used for Login & Registration -->
 	<script type="text/javascript" src="js/ajax.js" ></script>
 	
+	<!-- ^Klar, Registration Validation with jquery -->
+	<script type="text/javascript" src="js/validation.js" ></script>
 
-
-	<!-- Keller? -->
+	<!-- Keller, Coda Slider -->
 	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 	<script type="text/javascript" src="js/jquery.coda-slider-2.0.js"></script>
+
 	
 	<!-- Keller -->
 	<script type="text/javascript">
 		$().ready(function() {
 			$('#settings-slider').codaSlider();
 		});
+		
+	<!-- Arvet Coda Slider Browse-->
+	$().ready(function() {
+		$('#coda-slider-browse').codaSlider();
+	});
 
 	</script>
 

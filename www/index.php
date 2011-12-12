@@ -28,50 +28,63 @@
     </div> <!-- end div #search --> 
 
 
-<!-- Arvet test 1 -->
+<!-- Tab start -->
 <div id="main">
 
 	<div id="container">
 
-		      <ul class="menu">  
-		          <li id="new" class="active"> New </li>  
-		          <li id="browse"> Browse </li>  
-		          <li id="ranking"> Ranking </li>
-							<li id="moderator"> Moderator </li>
-							<li id="usrcntrl"> Control </li>
-							<li id="kebapowner"> Kebapowner </li> 
+		      <ul class="menu">
+			  
+				<!-- Default -->
+				<li id="new" class="active"> New </li> 	
+				<li id="browse"> Browse </li>  
+				<li id="ranking"> Ranking </li>
+				
+				<!-- User is logged in -->
+				<?php if ($_SESSION['logedin'] == "true")  { ?>
+					<li id="usrcntrl"> Control </li>
+				<?php } ?>
+				
+				<!-- User is moderator -->
+				<?php if ($myuser->usrType == "moderator" or $myuser->usrType == "admin")  { ?>
+					<li id="moderator"> Moderator </li>
+				<?php } ?>
+
+				<!-- User is Kebapowner -->
+				<?php if ($myuser->usrType == "kebapowner" or $myuser->usrType == "admin")  { ?>
+					<li id="kebapowner"> Kebapowner </li>
+				<?php } ?>
 		      </ul>
 	 
-		      <span class="clear"></span>  
+		    <span class="clear"></span>  
 
-		      <div class="content new"> 
-							<?php include 'tabs/new.php'; ?>
-					</div>
+		    <div class="content new"> 
+					<?php include 'tabs/new.php'; ?>
+			</div>
 
-					<div class="content browse">  
+			<div class="content browse">  
 		         	<?php include 'tabs/browse.php'; ?>
-		      </div>
+		    </div>
 
-		      <div class="content ranking"> 
-	 						<?php include 'tabs/ranking.php'; ?>
-					</div>
+		    <div class="content ranking"> 
+					<?php include 'tabs/ranking.php'; ?>
+			</div>
 
-		      <div class="content moderator"> 
-	 						<?php include 'tabs/moderator.php'; ?>
-					</div>
+		    <div class="content moderator"> 
+	 				<?php include 'tabs/moderator.php'; ?>
+			</div>
 
-		      <div class="content usrcntrl"> 
-	 						<?php include 'tabs/usrcntrl.php'; ?>
-					</div>
+		    <div class="content usrcntrl"> 
+					<?php include 'tabs/usrcntrl.php'; ?>
+			</div>
 
-		      <div class="content kebapowner"> 
-	 						<?php include 'tabs/kebapowner.php'; ?>
-					</div>
+		    <div class="content kebapowner"> 
+	 				<?php include 'tabs/kebapowner.php'; ?>
+			</div>
 	</div>  <!-- container -->
 </div> <!-- /main -->
 
-
-<!-- Arvet end test 1 -->
+<!-- Tab end -->
 
 	<div id="promo">
 		<table>

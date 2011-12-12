@@ -12,7 +12,7 @@
 /*** color / font sizes ***/
 body {
 	font-family:Verdana, sans-serif;
-	background-color:#BD0000;
+	background-color: dodgerblue;
 	color:white;
 }
 
@@ -22,8 +22,8 @@ h1 {
 }
 
 a:link, a:visited, a:active {
-	color:white;
-	text-decoration:underlined;
+	color: yellow;
+	text-decoration: underlined;
 }
 
 a:hover {
@@ -35,15 +35,16 @@ a:hover {
 /*** layout ***/
 
 		#main {
-			position: relative;
-			margin-top: 10%;
+			position: absolute;
+			top: 20%;
 			width: 800px;
 			/* 62golden rule */
 			right: 0%;
-			left: 15%;
+			left: 19%;
 			/* border: 1px solid #dedbd1; */
 			margin-bottom: 15px;
 			color: black;
+			/* background-color: black; */
 		}
 		
 		#map {
@@ -74,10 +75,10 @@ a:hover {
     display: block;  
 }
 
-/* Menu Tab */  
+/*  Tab */  
 #container{  
-    margin: 7em auto;
-    width: 700px;  
+    margin: 5m auto;
+    width: 700px;
 }  
 #container ul{  
     list-style: none;  
@@ -102,11 +103,11 @@ a:hover {
 }
 
 #container ul.menu li.active{
-		padding: 6px 10px px 10px;  
+	padding: 6px 10px px 10px;  
     background: #fff;  
     top: 1px;  
     border-bottom: -1; 
-		border-bottom-width: 0px;
+	border-bottom-width: 0px;
     color: dodgerblue;  
 }
 
@@ -115,26 +116,29 @@ a:hover {
 /* Content */  
 
 .content{  
-    margin: 0pt auto;  
+
     background: #efefef;  
-    background: #fff;
-    border-right: 1px solid #d0ccc9;
-    border-left: 1px solid #d0ccc9;  
-    border-bottom: 1px solid #d0ccc9;  
-    text-align: left;  
-    padding: 10px;  
-    padding-bottom: 20px;  
-    font-size: 11px;  
+    padding-top: 20px;
+    font-size: 13px;
+	
+	/* default width and height for all tab inhalte */
+	width: 800px;
+	height: 500px;
 } 
 
 /* /Content */
 
 /* Tab Content */
+
+/* block = show  / display: none --> hide first */
+
+/* issue with display: none; --> code-sldider thing ^Arvet */
 .content.new{  
-    display: block;  
+    /* display: block;  */
 }
 .content.browse{  
-    display: none;  
+   
+   display: none;
 }
 .content.ranking{  
     display: none;  
@@ -142,8 +146,9 @@ a:hover {
 .content.moderator{  
     display: none;  
 }
-.content.usrcntrl{  
-    display: none;  
+.content.usrcntrl{
+	/* hier sollte display: none; hin aber verträgt sich nicht mit dem slider :( */
+	display: none;
 }  
 .content.kebapowner{  
     display: none;  
@@ -161,6 +166,7 @@ a:hover {
 	margin-top: -55px;
 }*/
 
+
 /* Login */
 #login {
 	background-color:green;
@@ -177,7 +183,7 @@ a:hover {
 	-moz-border-radius: 0px 0px 20px 20px;
 	-webkit-border-radius: 0px 0px 20px 20px;
 	border-radius: 0px 0px 20px 20px;
-}
+} 
 
 /* Search */
 #search {
