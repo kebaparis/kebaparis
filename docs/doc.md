@@ -12,7 +12,8 @@ Der HTML-Quellcode wird auf der Serverseite mit **php** zusammengebaut. Auf der 
 
 ##classes
 ###class user
-In der user Klasse werden alle User spezifischen Aktionen gehandelt. Sei es Registration, aktivierung der Registration Login, Logout und das ganze Session handling
+In der user Klasse werden alle User spezifischen Aktionen gehandelt. Sei es Registration, Aktivierung der Registration Login, Logout und das ganze Session handling.
+
 
 ###class Database
 in dieser Klasse wird der db-handler definiert. Wird ein Objekt der Klasse gemacht, wird das file db_config.php included, in welches in etwa so aussieht:
@@ -27,4 +28,4 @@ Die Klasse Database wird nicht in die anderen Klassen referenziert. Ein Abbild d
 ####connect()
 hier wird der db-handler *gemacht*
 ####quit()
-hier wird der db-handler wieder gekillt.
+hier wird der db-handler wieder gekillt. = NULL
