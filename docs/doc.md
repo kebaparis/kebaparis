@@ -41,10 +41,10 @@ returned true of false wenn der User in der DB aktiv ist oder nicht.
 ####sendActivationEmail()
 versendet mit der Hilfe von der externen Funktion senEmail() das Registrationsemail mit Aktivierungslink. Dieser Link wird in der DB beim user hinterlegt.
 
-####generateHash()
+####generateHash($plainText, $salt)
 generiert den Hash zum user passwort inkl. Salt. Returns salt and md5(salt+password)
 
-####checkActivationLink()
+####checkActivationLink($linkSent)
 vergleicht den link der als Parameter übergeben wird mit dem in der db. Ist es derselbe wird der user auf aktiv gesetzt.
 
 ####checkUserDB() *besserer name!*
