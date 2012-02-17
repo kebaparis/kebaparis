@@ -1,41 +1,22 @@
 
+
+###################
+# T O C O M M I T #
+###################
+
+- Added in our pstatistic Overall (AVG) AND ratingcount
+- Fixed the update to statistics query AND added overall (AVG) AND ratingcount
+- Thoughts gelöscht
+- Tried to sort out the mess...
+- Added some short querys
+
+
 ###################
 # T H O U G H T S #
 ###################
 
-######################################## U S E R S ##
-/* 
-users.type auslagern? 
-	--> types.id 
-		--> 1: Client
-		--> 2: Moderator
-		--> 3: Admin
-		--> Default 1
-
-users.activeationkeysent	BOOLEAN?
-	--> warum TINYINT und kein Boolean?
-
-users.ip Warum nicht VARCHAR(15)?
-
-users.sessionid Für was genau?
-
-######################################## S P O T S ##
-
-Ranking? 
-	--> Dynamisch (jedesmal wenn User einen Kebabstand sieht)
-	--> Statisch (Platz wird alle 30 Minuten aktualisiert --> spots.id_ranking abgespeichert)
-
-Abspeicherung Google Maps Infos?
-	--> Extra Tabelle die zu spots.id_place verlinkt?
-
-
-######################################## S P O T S ##
-
-Rating Bewertung in INT oder FLOAT?
-
-Spot standardmässig aktiviert / deaktiviert?
-
-Kann User seine Bewertung ändern? Wenn ja wie lösen wir es? [Button edit] oder "realtime"?
+- Sollen wir (gleiches Prinzip wie Statistics) eine Tabelle für die User erstellen --> am meisten erstellte Kebapstände?  | --> Meiste Bewertungen abgegeben?
+- 
 
 ###################################################
 
@@ -142,7 +123,22 @@ price FLOAT,
 taste FLOAT,            
 location FLOAT,          
 waittime FLOAT, 
-AVG FLOAT,        
+overall FLOAT,        
+Primary Key (id),
+INDEX (id)
+) ENGINE=INNODB;
+
+CREATE TABLE statistics
+(
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+id_spot INT UNSIGNED NOT NULL,
+ratingcount INT UNSIGNED,     
+tuerkness FLOAT,             
+price FLOAT,             
+taste FLOAT,            
+location FLOAT,          
+waittime FLOAT, 
+overall FLOAT,        
 Primary Key (id),
 INDEX (id)
 ) ENGINE=INNODB;
@@ -177,69 +173,188 @@ INSERT INTO ratings (id_spot, id_rater, tuerkness, price, taste, location, waitt
   ('3','3','4','2','4','1','3');
 
 
- 
-#Average from RatingPoint
-select AVG(tuerkness) as tuerkness from ratings where id_spot = '1'
+#############################################
+############ S T A T I S T I C S  ###########
+#############################################
 
-#Insert into Statistics
-INSERT INTO statistics (tuerkness) VALUES AVG(tuerkness) from ratings where id_spot = '1'
-UPDATE statistics SET tuerkness='(select AVG(tuerkness) from ratings where id_spot = '1')' where id_spot= '1';
 
-/* start procedure pstatistic */ 
+#Average FROM 1x RatingPoint
+SELECT AVG(tuerkness) as tuerkness FROM ratings WHERE id_spot = '1'
+
+#Stored Procedure for our statistic filling
+// start procedure pstatistic 
 DELIMITER //
 CREATE PROCEDURE pstatistic(IN id_spot INT)
 
-#select AVG(tuerkness), AVG(price), AVG(taste), AVG(location), AVG(waittime) from ratings where id_spot = '1'
+#SELECT AVG(tuerkness), AVG(price), AVG(taste), AVG(location), AVG(waittime) FROM ratings WHERE id_spot = '1'
 SET @count = 
 (
   SELECT COUNT(*) FROM statistics WHERE id_spot = @id_spot;
 );
 
-# Wenn id_spot existiert in statistics dann:
+# Wenn id_spot existiert in Statistics dann:
 IF @count = 1 THEN
-  UPDATE statistics SET tuerkness= SELECT AVG(tuerkness), AVG(price), AVG(taste), AVG(location), AVG(waittime) from ratings where id_spot = @id_spot;
 
-  UPDATE (SELECT AVG(tuerkness), AVG(price), AVG(taste), AVG(location), AVG(waittime) from ratings where id_spot = @id_spot) SET tuerkness= ;
+
+#WORKS! not anymore...
+UPDATE statistics 
+INNER JOIN 
+(
+SELECT 
+  (SELECT COUNT(id) FROM ratings WHERE id_spot = @id_spot) as count
+  ,AVG(tuerkness) as avgtuerkness
+  ,AVG(price) as avgprice
+  ,AVG(taste) as avgtaste
+  ,AVG(location) as avglocation
+  ,AVG(waittime) as avgwaittime
+  ,AVG(tuerkness + price + taste + location + waittime) as avgoverall
+  ,id_spot
+  FROM ratings
+  WHERE id_spot = @id_spot
+  ) as r
+  SET ratingcount = r.count
+  ,tuerkness = r.avgtuerkness
+  ,price = r.avgprice
+  ,taste = r.avgtaste
+  ,location = r.avglocation
+  ,waittime = r.avgwaittime
+  ,overall = r.avgoverall
+  WHERE statistics.id_spot = r.id_spot;
+
+/* C/P without variables
+
+UPDATE statistics 
+INNER JOIN 
+(
+SELECT 
+  (SELECT COUNT(id) FROM ratings WHERE id_spot = '1') as count
+  ,AVG(tuerkness) as avgtuerkness
+  ,AVG(price) as avgprice
+  ,AVG(taste) as avgtaste
+  ,AVG(location) as avglocation
+  ,AVG(waittime) as avgwaittime
+  ,AVG(tuerkness + price + taste + location + waittime) as avgoverall
+  ,id_spot
+  FROM ratings
+  WHERE id_spot = '1'
+  ) as r
+  SET ratingcount = r.count
+  ,tuerkness = r.avgtuerkness
+  ,price = r.avgprice
+  ,taste = r.avgtaste
+  ,location = r.avglocation
+  ,waittime = r.avgwaittime
+  ,overall = r.avgoverall
+  WHERE statistics.id_spot = r.id_spot;
+
+
+
+  #WHERE statistics.id_spot = @id_spot;
+*/
+
+
+
 # Sonst neuen Eintrag in Statistic erstellen 
 ELSE
   # Funktioniert
-  INSERT INTO statistics (id_spot,tuerkness,price,taste,location,waittime) SELECT id,AVG(tuerkness), AVG(price), AVG(taste), AVG(location), AVG(waittime) from ratings where id_spot = 1;
+  # Erstelle neuen Eintrag in Statistics mit dem Durchschnitt der Bewertungen,ratingcount wo id_spot = 'x'
+  INSERT INTO statistics (id_spot
+  ,ratingcount
+  ,tuerkness
+  ,price
+  ,taste
+  ,location
+  ,waittime
+  ,overall)
+  SELECT id,
+    (SELECT COUNT(id) FROM ratings WHERE id_spot = @id_spot)
+    ,AVG(tuerkness)
+    ,AVG(price)
+    ,AVG(taste)
+    ,AVG(location)
+    ,AVG(waittime)
+    ,AVG(tuerkness + price + taste + location + waittime)
+  FROM ratings WHERE id_spot = @id_spot;
+
+  # INSERT INTO statistics (id_spot,ratingcount,tuerkness,price,taste,location,waittime,overall) SELECT id,(SELECT COUNT(id) FROM ratings WHERE id_spot = '1') ,AVG(tuerkness), AVG(price), AVG(taste), AVG(location), AVG(waittime), AVG(tuerkness + price + taste + location + waittime) FROM ratings WHERE id_spot = 1;
 
 END IF;
 END //
 DELIMITER ;
-/* End procedure pstatistic */
+// End procedure pstatistic 
 
-from ratings
 
-#Overall Average
-# 25 = Maximum 
-select AVG(tuerkness + price + taste + location + waittime) as overall from ratings where id_spot = '1'
+/* Old Crap, will be deleted soon, this is just for our history in git :D
+  #UPDATE statistics SET tuerkness= SELECT AVG(tuerkness), AVG(price), AVG(taste), AVG(location), AVG(waittime) FROM ratings WHERE id_spot = @id_spot;
+  #Not working (SQL)
+  
+  UPDATE statistics 
+  SET  tuerkness = avgtuerkness
+  ,price = avgprice
+  ,taste = avgtaste
+  FROM 
+  (SELECT AVG(tuerkness) as avgtuerkness
+  ,AVG(price) as avgprice
+  ,AVG(taste) as avgtaste
+  ,id_spot
+  FROM ratings
+  WHERE id_spot = 1
+  ) as a
+  INNER JOIN statistics s
+  ON s.id_spot = a.id_spot
+  UPDATE statistics SET tuerkness= (SELECT AVG(tuerkness) FROM ratings WHERE id_spot = @id_spot) WHERE id_spot = @id_spot;
+  UPDATE statistics SET (tuerkness,price,taste) (SELECT AVG(tuerkness),AVG(price),AVG(taste) FROM ratings WHERE id_spot = @id_spot)
+  UPDATE statistics SET tuerkness= (SELECT AVG(tuerkness) FROM ratings WHERE id_spot = 2) WHERE id_spot = 1
+  UPDATE (SELECT AVG(tuerkness), AVG(price), AVG(taste), AVG(location), AVG(waittime) FROM ratings WHERE id_spot = @id_spot) SET tuerkness= ;
 
-#Rating Count from Spots
-select count(id) from ratings where id_spot = '1'
+  #Insert into Statistics
+  #INSERT INTO statistics (tuerkness) VALUES AVG(tuerkness) FROM ratings WHERE id_spot = '1'
+  #UPDATE statistics SET tuerkness='(SELECT AVG(tuerkness) FROM ratings WHERE id_spot = '1')' WHERE id_spot= '1';
+End */
 
-#Top 10 ratings
-holy shit fuck crap hure
 
-#Users Ratings
-select count(id) from ratings where id_rater = '1'
+
+
+###################################
+############ S P O T S  ###########
+###################################
+
+#Rating Count FROM spot
+SELECT count(id) FROM ratings WHERE id_spot = '1'
+
+#Overall AVG FROM spots   MAX (25)
+SELECT AVG(tuerkness + price + taste + location + waittime) as overall FROM ratings WHERE id_spot = '1'
+
+
+###################################
+########### R A T I N G ###########
+###################################
 
 #Check if User has already rated this spot  --> if 0 == NO | < 0 == Yes
-select count(id) from ratings where id_spot = '1' and id_rater = '1'
+SELECT count(id) FROM ratings WHERE id_spot = '1' AND id_rater = '1'
+
+  #User hat noch kein Rating zu spot:
+  INSERT INTO ratings (id_spot, id_rater, tuerkness, price, taste, location, waittime) VALUES ('1','1','4','4','3','2','2');
+
+  #User hat schon ein Rating zu spot
+  UPDATE ratings SET tuerkness='5',price='5',taste='5' WHERE id_rater = '1' AND id_spot='1';
 
 #Show Users Rating for this spot
-select * from ratings where id_spot = '1' and id_rater = '1'
+SELECT * FROM ratings WHERE id_spot = '1' AND id_rater = '1'
+
+#Gesamte Ratinganzahl von User
+SELECT count(id) FROM ratings WHERE id_rater = '1'
 
 
-
-
-####### U S E R C O N T R O L #######
+#############################################
+########### U S E R C O N T R O L ###########
+#############################################
 
 # Show email?
 
 # Password change via our classes.php right?
 
-# Delete Account (ok with pw and user check in one query?)
-UPDATE users SET users.active='FALSE' where users.id= '1' and users.password = MD5('1')
+# Delete Account (ok with pw AND user check in one query?)
+UPDATE users SET users.active='FALSE' WHERE users.id= '1' AND users.password = MD5('1')
 
+*/
