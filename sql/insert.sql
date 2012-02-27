@@ -1,3 +1,5 @@
+USE kbp;
+
 ###################################### I N S E R T S I N T O D B  ##########################
 
 
@@ -172,8 +174,10 @@ SELECT count(id) FROM ratings WHERE id_rater = '1'
 
 # Show email?
 
+
 # Password change via our classes.php right?
 
-# Delete Account (ok with pw AND user check in one query?)
+
+# Delete Account (ok with pw AND user check in one query?) #there's a better way to do , salt and so...
 UPDATE users SET users.active='FALSE' WHERE users.id= '1' AND users.password = MD5('1')
 
