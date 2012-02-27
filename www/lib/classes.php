@@ -520,8 +520,8 @@ class Database {
 	public function connect() {
 
 		if (!isset($this->db_handler)) {
-			$this->db_handler = mysql_connect($this->db_server, $this->db_user, $this->db_password) or die ("connect to db failed!");
-			mysql_select_db($this->db_name, $this->db_handler) or die ("select of db failed!");
+			$this->db_handler = mysql_connect($this->db_server, $this->db_user, $this->db_password) or die(mysql_error());
+			mysql_select_db($this->db_name, $this->db_handler) or die(mysql_error());
 			//echo "db conected: " . $this->db_server . "</br>";
 		}
 
