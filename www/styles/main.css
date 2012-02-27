@@ -126,58 +126,17 @@ a:hover {
 	height: 500px;
 } 
 
-/* /Content */
-
-/* Tab Content */
-
-/* block = show  / display: none --> hide first */
-
-/* issue with display: none; --> code-sldider thing ^Arvet */
-.content.new{  
-    /* display: block;  */
-}
-.content.browse{  
-   
-   display: none;
-}
-.content.ranking{  
-    display: none;  
-}
-.content.moderator{  
-    display: none;  
-}
-.content.usrcntrl{
-	/* hier sollte display: none; hin aber verträgt sich nicht mit dem slider :( */
-	display: none;
-}  
-.content.kebapowner{  
-    display: none;  
-} 
-
-/***** TABS end ******/
-
-/*
-#drminfo {
-	position: relative;
-	background-color: blue;
-	width: 600px;
-	height: 300px;
-	margin-left: 575px;
-	margin-top: -55px;
-}*/
-
-
 /* Login */
 #login {
-	background-color:green;
+	background-color: red;
 	position:absolute;
 	top: 2px;
 	right: 4px;
 	padding-top: 8px;
 	padding-bottom: 4px;
 	padding-left: 2%;
-	width: 35%;
-	height: 3%;
+	width: 20%;
+	height: 15%;
 	
 	/* curved */
 	-moz-border-radius: 0px 0px 20px 20px;
@@ -191,16 +150,16 @@ a:hover {
 	position: absolute;
 	top: 3%;
 	left: 10%;
-	
 	}
 
-#search table	{
+#search table
+	{
 	width: 300px;
 	}
 
-
 /* Promo */
-#promo {
+#promo
+{
 	/* background-color: dodgerblue; */
 	position:absolute;
 	top: 40%;
@@ -210,7 +169,9 @@ a:hover {
 	width: 3%;
 	height: 21%;
 }
-#promo td {
+
+#promo td 
+{
 	vertical-align: middle;
 	background-color:green;
 	width: 100px;
@@ -236,7 +197,7 @@ a:hover {
 	-moz-border-radius: 0px 0px 15px 15px;
 	-webkit-border-radius: 0px 0px 15px 15px;
 	border-radius: 0px 0px 15px 15px;
-	}
+}
 
 
 
