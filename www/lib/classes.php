@@ -308,58 +308,26 @@ EOF;
 
     }
 
-	//creates a usless standart session
-	public function createSession() {
+    public function session() {
+		session_start();
 
-		/*
-		$this->session_id = session_id();
-		
-		if(!empty($this->session_id)) {
-			//create session if no jet existing
-			session_name('usr_session');
-			
-			ini_set('session.use_cookies', true);
-			ini_set('session.gc_maxlifetime', time() + $this->CookieLifeTime + 60);
-			ini_set('session.cookie_lifetime', time() + $this->CookieLifeTime);
-			
-			session_set_cookie_params($this->CookieLifeTime);*/
-			session_start();
-			//standart values
-			$_SESSION['logedin'] = "false";
-			echo "new session created <br />";
-		//}
-		//echo "session_id: " . $this->session_id . "<br />";
-	}
-
-	//makeSessionUsable > login
-    private function makeSessionUsable() {
-
-		echo "makeSessionUsable <- now logedin = true <br />";
-		$_SESSION['username'] = $this->usrName;
 		$_SESSION['logedin'] = "true";
-
-
-		//0nly for testing
-		echo "Username: ";
-		echo $_SESSION['username'];
-		echo " Loggedin: ";
-		echo $_SESSION['logedin'] . "</br>";
+		$_SESSION['username'] = $this->usrName;
 
     }
 
+
 	public function login($password) {
 
-		$this->createSession();
+		$this->usrPassword['plaintext'] = $password;		
 
-		$this->usrPassword['plaintext'] = $password;
-
-		$rawResult = mysql_query("SELECT usrPassword, usrSalt FROM tUser WHERE tUser.usrName = '$this->usrName'");
+		$rawResult = mysql_query("SELECT password, salt FROM users WHERE users.name = '$this->usrName'");
 		$count = mysql_num_rows($rawResult);
 
 		if ($count == 1) {
 			$result = mysql_fetch_array($rawResult);
-			$this->usrPassword['hash'] = $result['usrPassword'];
-			$this->usrPassword['salt'] = $result['usrSalt'];
+			$this->usrPassword['hash'] = $result['password'];
+			$this->usrPassword['salt'] = $result['salt'];
 		}
 		else {
 			$error = false;
@@ -369,10 +337,8 @@ EOF;
 
 		if ($sentHash == $this->usrPassword['hash']) {
 			echo "correct username und password!! <br />";
-			$this->printUser();
-			$this->makeSessionUsable();
-			$this->printUser();
-			
+			$this->session();
+			$this->printUser();	
 			
 			$error = true;
 		}
@@ -399,18 +365,13 @@ EOF;
       
     } 
 
-	//destroy session > logout
-    public function destroySession() {
-      //if checkLogin true then
-        //destroy session
-        //return true
-      //else
-      //return false
-    }
-    
-    	//set session variable logedin to false
+    //Destroy Session
     public function logout() {
-      $_SESSION['logedin'] = "false";
+      	ob_start();
+		session_start();
+		session_unset();
+		session_destroy();
+		ob_end_flush();
     }
 
 
