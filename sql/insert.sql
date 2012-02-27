@@ -101,10 +101,6 @@ SELECT
   ,waittime = r.avgwaittime
   ,overall = r.avgoverall
   WHERE statistics.id_spot = r.id_spot;
-
-
-
-  #WHERE statistics.id_spot = @id_spot;
 */
 
 
@@ -137,37 +133,6 @@ END IF;
 END //
 DELIMITER ;
 // End procedure pstatistic 
-
-
-/* Old Crap, will be deleted soon, this is just for our history in git :D
-  #UPDATE statistics SET tuerkness= SELECT AVG(tuerkness), AVG(price), AVG(taste), AVG(location), AVG(waittime) FROM ratings WHERE id_spot = @id_spot;
-  #Not working (SQL)
-  
-  UPDATE statistics 
-  SET  tuerkness = avgtuerkness
-  ,price = avgprice
-  ,taste = avgtaste
-  FROM 
-  (SELECT AVG(tuerkness) as avgtuerkness
-  ,AVG(price) as avgprice
-  ,AVG(taste) as avgtaste
-  ,id_spot
-  FROM ratings
-  WHERE id_spot = 1
-  ) as a
-  INNER JOIN statistics s
-  ON s.id_spot = a.id_spot
-  UPDATE statistics SET tuerkness= (SELECT AVG(tuerkness) FROM ratings WHERE id_spot = @id_spot) WHERE id_spot = @id_spot;
-  UPDATE statistics SET (tuerkness,price,taste) (SELECT AVG(tuerkness),AVG(price),AVG(taste) FROM ratings WHERE id_spot = @id_spot)
-  UPDATE statistics SET tuerkness= (SELECT AVG(tuerkness) FROM ratings WHERE id_spot = 2) WHERE id_spot = 1
-  UPDATE (SELECT AVG(tuerkness), AVG(price), AVG(taste), AVG(location), AVG(waittime) FROM ratings WHERE id_spot = @id_spot) SET tuerkness= ;
-
-  #Insert into Statistics
-  #INSERT INTO statistics (tuerkness) VALUES AVG(tuerkness) FROM ratings WHERE id_spot = '1'
-  #UPDATE statistics SET tuerkness='(SELECT AVG(tuerkness) FROM ratings WHERE id_spot = '1')' WHERE id_spot= '1';
-End */
-
-
 
 
 ###################################
