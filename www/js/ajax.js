@@ -19,16 +19,21 @@ function login()
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
 	
-	// Field empty check ^Ar
-	if(username == "" || password == "")
+	// Username empty
+	if(username == "" )
 	{
 		//document.getElementById('statusHolder').innerHTML = "[Test] username or/and password is empty";
-		setFieldsEmpty();
-		alert("[Test] Username or/and Password empty, please bring this back to HTML site! I have no Idea how, setFieldsEmpty also not work. ^Klar")
+		alert("Username empty")		
 		return;
 	}
-	alert("Nothing is empty, login...");
-	
+	// Password empty
+	else if (password == "")
+	{
+		//document.getElementById('statusHolder').innerHTML = "[Test] username or/and password is empty";
+		alert("Password empty")
+		return;
+	}
+
 	
 	xmlhttp.onreadystatechange=function()
 	{
