@@ -103,20 +103,3 @@ overall FLOAT,
 Primary Key (id),
 INDEX (id)
 ) ENGINE=INNODB;
-
-CREATE TABLE statistics
-(
-id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-id_spot INT UNSIGNED NOT NULL,
-ratingcount INT UNSIGNED,     
-tuerkness FLOAT,             
-price FLOAT,             
-taste FLOAT,            
-location FLOAT,          
-waittime FLOAT, 
-overall FLOAT,        
-Primary Key (id),
-INDEX (id)
-) ENGINE=INNODB;
-
-
