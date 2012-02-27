@@ -161,13 +161,12 @@ SELECT * FROM ratings WHERE id_spot = '1' AND id_rater = '1'
 #Gesamte Ratinganzahl von User
 SELECT count(id) FROM ratings WHERE id_rater = '1'
 
-
 #############################################
 ########### U S E R C O N T R O L ###########
 #############################################
 
 # Show email?
-
+select email from users where id = 1
 
 # Password change via our classes.php right?
 
