@@ -10,6 +10,10 @@ Vor einem Jahr und 2 Tagen machten wir den ersten commit zum Projekt kebaparis. 
 ##tech
 Der HTML-Quellcode wird auf der Serverseite mit **php** zusammengebaut. Auf der Clientseite werden einzelne Sachen wie Tags auf der Seite mit **JavaScript** verändert. Es ist auch eine Version **jQuery** integriert.
 
+## DB
+
+to look at the ERD go to http://5th.li/erd and paste in the docs/erd.xml and hit **load xml**
+
 ##classes
 ###class user
 In der user Klasse werden alle User spezifischen Aktionen gehandelt. Sei es Registration, Aktivierung der Registration Login, Logout und das ganze Session handling.
