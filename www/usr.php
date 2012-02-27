@@ -1,6 +1,6 @@
 <?php 
 
-	include 'classes.php';
+	include 'lib/classes.php';
 	$myDB = new Database();
 	$myDB->connect();
 
