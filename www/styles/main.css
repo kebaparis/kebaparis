@@ -48,22 +48,22 @@ width: 300px;
 
 #login
 {
-top: 5%;
-right: 5%;
+top: 10%;
+left: 20%;
 position: absolute;
 background-color: black;
-height: 20%;
-width: 13%;
+height: 35%;
+width: 33%;
 }
 
 #register
 {
-top: 27%;
-right: 5%;
+top: 10%;
+right: 10%;
 position: absolute;
 background-color: green;
-height: 20%;
-width: 13%;
+height: 35%;
+width: 33%;
 }
 
 /* Promo */
