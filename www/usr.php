@@ -115,32 +115,32 @@
 	function printLoginForm()
 	{
 		?>
-		
-		<a href="#"> Login </a>
-		
-			<table>
-				<!-- Username -->
-				<tr>
-					<td> <label> Username <label> </td>
-				</tr>
-				<tr>
-					<td> <input type="text" name="username" id="username"/> </td>
-				</tr>
+			<div id="login">
+				<a href="#"> Login </a>
 			
-				<!-- Password -->
-				<tr>
-					<td> <label> Password <label> </td>
-				</tr>
-				<tr>
-					<td> <input type="password" name="password" id="password"/> </td>
-				</tr>
-			
-				<!-- Button 'send' -->
-				<tr rowspan="2">
-					<td> <a href="#" onClick="login()">Login</a> </td>
-				</tr>
-			</table>
-		
+				<table>
+					<!-- Username -->
+					<tr>
+						<td> <label> Username <label> </td>
+					</tr>
+					<tr>
+						<td> <input type="text" name="username" id="username"/> </td>
+					</tr>
+				
+					<!-- Password -->
+					<tr>
+						<td> <label> Password <label> </td>
+					</tr>
+					<tr>
+						<td> <input type="password" name="password" id="password"/> </td>
+					</tr>
+				
+					<!-- Button 'send' -->
+					<tr rowspan="2">
+						<td> <a href="#" onClick="login()">Login</a> </td>
+					</tr>
+				</table>
+			</div>
 		<?php
 	} // end printLoginForm()
 
@@ -151,44 +151,44 @@
 	}
 	
 	
-	// Print Registration Form, should open after jquery click
 	function printRegistrationForm()
 	{
 	?>
-	
-		<a href="#"> Register </a>
-		
-		<table>
-				<!-- Username -->
-				<tr>
-					<td> <label> Username <label> </td>
-				</tr>
-				<tr>
-					<td> <input type="text" name="username" id="usernameR"/> </td>
-				</tr>
-			
-				<!-- First Password field -->
-				<tr>
-					<td> <label> Password <label> </td>
-				</tr>
-				<tr>
-					<td> <input type="text" name="password" id="passwordR"/> </td>
-				</tr>
 
-				<!-- E-Mail -->
-				<tr>
-					<td> <label> E-Mail <label> </td>
-				</tr>
-				<tr>
-					<td> <input type="text" name="email" id="email"/> </td>
-				</tr>
+		<div id ="register"> 
+			<a href="#"> Register </a>
 			
-				<!-- Button 'send' -->
-				<tr rowspan="2">
-					<td> <a href="#" onClick="register()">Register</a> </td>
-				</tr>
-		</table>
+			<table>
+					<!-- Username -->
+					<tr>
+						<td> <label> Username <label> </td>
+					</tr>
+					<tr>
+						<td> <input type="text" name="username" id="usernameR"/> </td>
+					</tr>
+				
+					<!-- First Password field -->
+					<tr>
+						<td> <label> Password <label> </td>
+					</tr>
+					<tr>
+						<td> <input type="text" name="password" id="passwordR"/> </td>
+					</tr>
 
+					<!-- E-Mail -->
+					<tr>
+						<td> <label> E-Mail <label> </td>
+					</tr>
+					<tr>
+						<td> <input type="text" name="email" id="email"/> </td>
+					</tr>
+				
+					<!-- Button 'send' -->
+					<tr rowspan="2">
+						<td> <a href="#" onClick="register()">Register</a> </td>
+					</tr>
+			</table>
+		</div>
 	<?php
 	}
 
