@@ -1,3 +1,0 @@
-- user->__destruct() muss zuerst Daten aus den Attributen, dann aus der Session und zum Schuss aus der DB holen
-- user->logout() schreiben
-- login.php danach daten per POST ausser bei activation dort muss es per GET passieren
