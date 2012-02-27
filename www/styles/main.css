@@ -31,131 +31,40 @@ a:hover {
 	text-decoration:none;
 }
 
-
-/*** layout ***/
-
-		#main {
-			position: absolute;
-			top: 20%;
-			width: 800px;
-			/* 62golden rule */
-			right: 0%;
-			left: 19%;
-			/* border: 1px solid #dedbd1; */
-			margin-bottom: 15px;
-			color: black;
-			/* background-color: black; */
-		}
-		
-		#map {
-			vertical-align:middle;
-			text-align:center;
-			width:300px;
-			height:300px;
-		}
-		#ort{
-		height: 45px;
-		text-align: center;
-		}
-		
-		 
-		#buttons td {
-		width: 150px;
-		height: 100%;
-		background-color: blue;
-		}
-
-
-/* TABS  start */
-
-.clear{  
-    clear: both;  
-    height: 0;  
-    visibility: hidden;  
-    display: block;  
-}
-
-/*  Tab */  
-#container{  
-    margin: 5m auto;
-    width: 700px;
-}  
-#container ul{  
-    list-style: none;  
-    list-style-position: outside;  
-}  
-#container ul.menu li{  
-    float: left;  
-    margin-right: 5px;  
-    margin-bottom: -1px;  
-}  
-#container ul.menu li{  
-    font-weight: 700;  
-    display: block;  
-    padding: 5px 10px 5px 10px;  
-    background: #efefef;  
-    margin-bottom: -1px;  
-    border: 1px solid #d0ccc9;  
-    border-width: 1px 1px 1px 1px;  
-    position: relative;  
-    color: #898989;  
-    cursor: pointer;  
-}
-
-#container ul.menu li.active{
-	padding: 6px 10px px 10px;  
-    background: #fff;  
-    top: 1px;  
-    border-bottom: -1; 
-	border-bottom-width: 0px;
-    color: dodgerblue;  
-}
-
-/* /menu */  
-
-/* Content */  
-
-.content{  
-
-    background: #efefef;  
-    padding-top: 20px;
-    font-size: 13px;
-	
-	/* default width and height for all tab inhalte */
-	width: 800px;
-	height: 500px;
-} 
-
-/* Login */
-#login {
-	background-color: red;
-	position:absolute;
-	top: 2px;
-	right: 4px;
-	padding-top: 8px;
-	padding-bottom: 4px;
-	padding-left: 2%;
-	width: 20%;
-	height: 15%;
-	
-	/* curved */
-	-moz-border-radius: 0px 0px 20px 20px;
-	-webkit-border-radius: 0px 0px 20px 20px;
-	border-radius: 0px 0px 20px 20px;
-} 
-
 /* Search */
-#search {
-	/* background-color: green; */
-	position: absolute;
-	top: 3%;
-	left: 10%;
-	}
+#search 
+{
+background-color: black;
+position: absolute;
+top: 3%;
+left: 15%;
+height: 3%;
+}
 
 #search table
-	{
-	width: 300px;
-	}
+{
+width: 300px;
+}
+
+#login
+{
+top: 5%;
+right: 5%;
+position: absolute;
+background-color: black;
+height: 20%;
+width: 13%;
+}
+
+#register
+{
+top: 27%;
+right: 5%;
+position: absolute;
+background-color: green;
+height: 20%;
+width: 13%;
+}
 
 /* Promo */
 #promo
@@ -185,18 +94,7 @@ a:hover {
 /*** footer ***/
 #footer
 {
-	background-color: dodgerblue;
-	width: 75%;
-	height: 30px;
-	margin: 250px auto auto auto;
-	padding-top: 12px;
-	
-	font-size: 14px;
-	text-align: center;
 
-	-moz-border-radius: 0px 0px 15px 15px;
-	-webkit-border-radius: 0px 0px 15px 15px;
-	border-radius: 0px 0px 15px 15px;
 }
 
 
