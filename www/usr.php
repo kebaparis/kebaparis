@@ -4,7 +4,7 @@
 	$myDB = new Database();
 	$myDB->connect();
 
-	//define request type (login / logout / registration / activation / blahh)
+	//define request type (login / logout / registration / activation / default)
 	$rtype = $_REQUEST['rtype'];
 
 	switch ($rtype) 
@@ -31,7 +31,7 @@
 
 	function lin() 
 	{
-		echo "login requested <br />";
+		echo "[login] <br />";
 		$User['username'] = $_REQUEST['username'];
 		$User['password'] = $_REQUEST['password'];
 
@@ -45,9 +45,9 @@
 		else
 		{
 			//show login form if login failed
-			echo "[test] Logindaten waren falsch";
+			echo "Username / Passwort is falsch";
 			printLoginForm();
-			printRegistrationForm();
+			//printRegistrationForm();
 		}
 
 	} // end lin()
@@ -63,7 +63,7 @@
 
 		echo "logged out.";
 		printLoginForm();
-		printRegistrationForm();
+		//printRegistrationForm();
 
 	} // end lou()
 
@@ -115,9 +115,7 @@
 	function printLoginForm()
 	{
 		?>
-			<div id="login">
-				<a href="#"> Login </a>
-			
+			<div id="login">			
 				<table>
 					<!-- Username -->
 					<tr>
@@ -156,8 +154,6 @@
 	?>
 
 		<div id ="register"> 
-			<a href="#"> Register </a>
-			
 			<table>
 					<!-- Username -->
 					<tr>
