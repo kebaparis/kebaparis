@@ -28,6 +28,7 @@
 	$myDB->quit();
 
 
+
 	function lin() 
 	{
 		echo "login requested <br />";
@@ -35,12 +36,6 @@
 		$User['password'] = $_REQUEST['password'];
 
 		$myuser = new user($User['username']);
-		/* Arvet old
-		if($myuser->login($User['password']) == true )
-		{
-			printLoggedInForm($myuser->usrName);
-		}
-		*///Arvet new
 
 			
 		if ($myuser->login($User['password']) == true) 
@@ -121,9 +116,7 @@
 	{
 		?>
 		
-		<a class="tlogino-tloginc" href="#">Login</a>
-		
-		<div id="tlogin">
+		<a href="#"> Login </a>
 		
 			<table>
 				<!-- Username -->
@@ -148,8 +141,6 @@
 				</tr>
 			</table>
 		
-		</div>
-		
 		<?php
 	} // end printLoginForm()
 
@@ -165,12 +156,9 @@
 	{
 	?>
 	
-		<!-- used for toggle-->
-		<a class="trego-tregc" href="#">Register</a>
+		<a href="#"> Register </a>
 		
-		<div id="treg">
-		
-			<table>
+		<table>
 				<!-- Username -->
 				<tr>
 					<td> <label> Username <label> </td>
@@ -184,15 +172,7 @@
 					<td> <label> Password <label> </td>
 				</tr>
 				<tr>
-					<td> <input type="password" name="password" id="passwordR"/> </td>
-				</tr>
-
-				<!-- Second Password field -->
-				<tr>
-					<td> <label> Password <label> </td>
-				</tr>
-				<tr>
-					<td> <input type="password" name="password_again" id="passwordS"/> </td>
+					<td> <input type="text" name="password" id="passwordR"/> </td>
 				</tr>
 
 				<!-- E-Mail -->
@@ -207,9 +187,7 @@
 				<tr rowspan="2">
 					<td> <a href="#" onClick="register()">Register</a> </td>
 				</tr>
-			</table>
-			
-		</div>
+		</table>
 
 	<?php
 	}
