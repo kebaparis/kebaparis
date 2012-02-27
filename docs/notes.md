@@ -15,7 +15,11 @@
 ###################
 
 - Sollen wir (gleiches Prinzip wie Statistics) eine Tabelle für die User erstellen --> am meisten erstellte Kebapstände?  | --> Meiste Bewertungen abgegeben?
-- 
+## old shit
+- user->__destruct() muss zuerst Daten aus den Attributen, dann aus der Session und zum Schuss aus der DB holen
+- user->logout() schreiben
+- login.php danach daten per POST ausser bei activation dort muss es per GET passieren
+
 
 ###################################################
 
